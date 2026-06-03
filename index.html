@@ -15,7 +15,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260603" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -27,12 +27,18 @@
         </span>
       </a>
       <nav class="main-nav" aria-label="Основная навигация">
-        <a href="#offer">Оффер</a>
+        <a href="#offer">О доме</a>
         <a href="#projects">Проекты</a>
         <a href="#kit">Комплект</a>
+        <a href="#calculator">Расчет</a>
         <a href="#process">Этапы</a>
         <a href="#contacts">Контакты</a>
       </nav>
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <a class="header-action" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
         Написать
       </a>
@@ -44,7 +50,7 @@
         <div class="hero__shade" aria-hidden="true"></div>
         <div class="hero__content">
           <p class="eyebrow">Краснодар и район · под заказ</p>
-          <h1 id="hero-title">СИП-дом 56 м² с фундаментом от 1&nbsp;400&nbsp;000&nbsp;₽</h1>
+          <h1 id="hero-title">СИП-дом 56 м² с&nbsp;фундаментом от 1&nbsp;400&nbsp;000&nbsp;₽</h1>
           <p class="hero__lead">
             Домокомплект от собственного производства: сваи, СИП-панели, кровля,
             окна, входная дверь, терраса, коммуникации, договор и гарантия.
@@ -73,7 +79,7 @@
       <section class="intro-band" id="offer" aria-labelledby="offer-title">
         <div class="container intro-grid">
           <div>
-            <p class="section-label">Что продаем</p>
+            <p class="section-label">О доме</p>
             <h2 id="offer-title">Домокомплект, который можно быстро вывести в строительство</h2>
           </div>
           <div class="intro-copy">
@@ -95,10 +101,10 @@
         <div class="container">
           <div class="section-head">
             <p class="section-label">Линейка</p>
-            <h2 id="projects-title">Проекты для первого экрана продаж</h2>
+            <h2 id="projects-title">Проекты и варианты под участок</h2>
             <p>
-              Первый проект повторяет параметры объявления. Остальные позиции
-              нужны для расширения выбора и первичного диалога с клиентом.
+              Базовый проект повторяет параметры объявления. Остальные варианты
+              помогают быстро понять желаемую площадь и формат дома.
             </p>
           </div>
 
@@ -247,13 +253,45 @@
               <strong><output id="area-output" for="area-range">56</output> м²</strong>
             </label>
             <input id="area-range" type="range" min="24" max="140" step="1" value="56" />
+
+            <form class="lead-form" data-lead-form>
+              <div class="form-grid">
+                <label>
+                  <span>Имя</span>
+                  <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
+                </label>
+                <label>
+                  <span>Телефон</span>
+                  <input type="tel" name="phone" autocomplete="tel" placeholder="+7" />
+                </label>
+                <label>
+                  <span>Формат</span>
+                  <select name="format">
+                    <option>Дом 56 м²</option>
+                    <option>Дом больше 70 м²</option>
+                    <option>Баня или гостевой дом</option>
+                    <option>Нужна консультация</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Город или район</span>
+                  <input type="text" name="location" placeholder="Например, Краснодар" />
+                </label>
+              </div>
+              <label class="form-note">
+                <span>Комментарий</span>
+                <textarea name="message" rows="4" placeholder="Площадь, участок, терраса, коммуникации, отделка"></textarea>
+              </label>
+              <button class="button button--primary" type="submit">Подготовить заявку</button>
+              <p class="form-status" data-form-status aria-live="polite"></p>
+            </form>
           </div>
 
           <aside class="calc-result" aria-live="polite">
             <span>Ориентир стоимости</span>
             <strong id="price-output">1 400 000 ₽</strong>
             <p id="calc-note">Для дома 56 м²: 7 × 8 м, 1 этаж, свайный фундамент.</p>
-            <a class="button button--primary" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
+            <a class="button button--light" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
               Обсудить расчет
             </a>
           </aside>
@@ -264,7 +302,7 @@
         <div class="container">
           <div class="section-head">
             <p class="section-label">Порядок работы</p>
-            <h2 id="process-title">Как вести клиента от заявки до договора</h2>
+            <h2 id="process-title">Как проходит работа от заявки до договора</h2>
           </div>
           <ol class="steps">
             <li>
@@ -343,7 +381,7 @@
             <a class="button button--primary" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
               Написать на Avito
             </a>
-            <p>Продавец: Baraboy Evgen · документы проверены · отвечает за несколько часов</p>
+            <p>Продавец: Baraboy Evgen · СИП-дома под заказ в Краснодаре</p>
           </div>
         </div>
       </section>
@@ -356,6 +394,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260603"></script>
   </body>
 </html>
