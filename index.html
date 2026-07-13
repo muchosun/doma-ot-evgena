@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>СИП-дома в Краснодаре | Baraboy Evgen</title>
+    <title>Проект СИП-дома в Краснодаре | Baraboy Evgen</title>
     <meta
       name="description"
-      content="Домокомплекты из СИП-панелей под заказ в Краснодаре: фундамент, стены, кровля, окна, дверь, коммуникации, договор и гарантия."
+      content="Заявка на подготовку проекта СИП-дома под участок: базовые параметры дома, ориентир стоимости, связь по телефону и мессенджерам."
     />
-    <meta property="og:title" content="СИП-дом 56 м² с фундаментом от 1 400 000 ₽" />
+    <meta property="og:title" content="Подготовка проекта СИП-дома под участок" />
     <meta
       property="og:description"
-      content="Домокомплекты от производителя в Краснодаре. Проект в подарок, договор и гарантия."
+      content="Быстрый квиз по параметрам дома: площадь, этажность, участок, комплектация и контакт для расчета."
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
-    <link rel="stylesheet" href="styles.css?v=20260603" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css?v=20260713" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -30,7 +31,7 @@
         <a href="#offer">О доме</a>
         <a href="#projects">Проекты</a>
         <a href="#kit">Комплект</a>
-        <a href="#calculator">Расчет</a>
+        <a href="#quiz">Заявка</a>
         <a href="#process">Этапы</a>
         <a href="#contacts">Контакты</a>
       </nav>
@@ -52,11 +53,11 @@
           <p class="eyebrow">Краснодар и район · под заказ</p>
           <h1 id="hero-title">СИП-дом 56 м² с&nbsp;фундаментом от 1&nbsp;400&nbsp;000&nbsp;₽</h1>
           <p class="hero__lead">
-            Домокомплект от собственного производства: сваи, СИП-панели, кровля,
-            окна, входная дверь, терраса, коммуникации, договор и гарантия.
+            Начните с короткой заявки: площадь, этажность, участок, комплектация
+            и телефон для связи. На основе этих данных готовится первый расчет и проект.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#calculator">Рассчитать дом</a>
+            <a class="button button--primary" href="#quiz">Заполнить заявку</a>
             <a class="button button--secondary" href="#kit">Что входит</a>
           </div>
           <dl class="hero__facts" aria-label="Ключевые параметры">
@@ -239,61 +240,164 @@
         </div>
       </section>
 
-      <section class="section" id="calculator" aria-labelledby="calculator-title">
+      <section class="section" id="quiz" aria-labelledby="quiz-title">
         <div class="container calc-layout">
           <div class="calc-panel">
-            <p class="section-label">Быстрый расчет</p>
-            <h2 id="calculator-title">Оцените бюджет по площади</h2>
+            <p class="section-label">Квиз-заявка</p>
+            <h2 id="quiz-title">Подготовим проект дома под ваш участок</h2>
             <p>
-              Расчет использует цену из объявления: 25 000 ₽ за м². Итоговая
-              смета зависит от проекта, участка и выбранной комплектации.
+              Укажите базовые параметры будущего дома. Прототип сформирует текст
+              заявки, проверит телефон и подготовит передачу в WhatsApp или Max.
             </p>
-            <label class="range-field" for="area-range">
-              <span>Площадь дома</span>
-              <strong><output id="area-output" for="area-range">56</output> м²</strong>
-            </label>
-            <input id="area-range" type="range" min="24" max="140" step="1" value="56" />
 
             <form class="lead-form" data-lead-form>
-              <div class="form-grid">
-                <label>
-                  <span>Имя</span>
-                  <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
+              <fieldset class="quiz-step">
+                <legend><span>01</span> Дом и участок</legend>
+                <div class="form-grid">
+                  <label>
+                    <span>Назначение</span>
+                    <select name="purpose">
+                      <option>Дом для постоянного проживания</option>
+                      <option>Дача на сезон</option>
+                      <option>Гостевой дом</option>
+                      <option>Баня или хозяйственная постройка</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Этажность</span>
+                    <select name="floors">
+                      <option>1 этаж</option>
+                      <option>1 этаж + мансарда</option>
+                      <option>2 этажа</option>
+                      <option>Пока не решили</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Участок</span>
+                    <select name="plot">
+                      <option>Участок уже есть</option>
+                      <option>Участок в подборе</option>
+                      <option>Нужна консультация по участку</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Город или район</span>
+                    <input type="text" name="location" placeholder="Например, Краснодарский край" />
+                  </label>
+                </div>
+
+                <label class="range-field" for="area-range">
+                  <span>Планируемая площадь</span>
+                  <strong><output id="area-output" for="area-range">56</output> м²</strong>
                 </label>
-                <label>
-                  <span>Телефон</span>
-                  <input type="tel" name="phone" autocomplete="tel" placeholder="+7" />
+                <input id="area-range" type="range" name="area" min="24" max="140" step="1" value="56" />
+              </fieldset>
+
+              <fieldset class="quiz-step">
+                <legend><span>02</span> Что включить в проект</legend>
+                <div class="option-grid">
+                  <label>
+                    <input type="checkbox" name="features" value="Терраса или крыльцо" checked />
+                    <span>Терраса или крыльцо</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" name="features" value="Свайный фундамент" checked />
+                    <span>Свайный фундамент</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" name="features" value="Коммуникации" checked />
+                    <span>Коммуникации</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" name="features" value="Чистовая отделка" />
+                    <span>Чистовая отделка</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" name="features" value="Индивидуальная планировка" />
+                    <span>Индивидуальная планировка</span>
+                  </label>
+                  <label>
+                    <input type="checkbox" name="features" value="Проект в подарок" checked />
+                    <span>Проект в подарок</span>
+                  </label>
+                </div>
+                <label class="form-note">
+                  <span>Комментарий к дому</span>
+                  <textarea name="message" rows="4" placeholder="Размер участка, желаемая планировка, сроки, особенности подъезда"></textarea>
                 </label>
-                <label>
-                  <span>Формат</span>
-                  <select name="format">
-                    <option>Дом 56 м²</option>
-                    <option>Дом больше 70 м²</option>
-                    <option>Баня или гостевой дом</option>
-                    <option>Нужна консультация</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Город или район</span>
-                  <input type="text" name="location" placeholder="Например, Краснодар" />
-                </label>
-              </div>
-              <label class="form-note">
-                <span>Комментарий</span>
-                <textarea name="message" rows="4" placeholder="Площадь, участок, терраса, коммуникации, отделка"></textarea>
-              </label>
-              <button class="button button--primary" type="submit">Подготовить заявку</button>
+              </fieldset>
+
+              <fieldset class="quiz-step">
+                <legend><span>03</span> Контакт для связи</legend>
+                <div class="form-grid">
+                  <label>
+                    <span>Имя</span>
+                    <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
+                  </label>
+                  <label>
+                    <span>Телефон</span>
+                    <input type="tel" name="phone" autocomplete="tel" placeholder="+7 900 000-00-00" required />
+                  </label>
+                  <label>
+                    <span>Куда удобнее ответить</span>
+                    <select name="contactMethod">
+                      <option>WhatsApp</option>
+                      <option>Max</option>
+                      <option>Звонок</option>
+                      <option>SMS</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Когда связаться</span>
+                    <select name="contactTime">
+                      <option>Сегодня</option>
+                      <option>Завтра</option>
+                      <option>В будний день</option>
+                      <option>После 18:00</option>
+                    </select>
+                  </label>
+                </div>
+              </fieldset>
+
+              <button class="button button--primary" type="submit">Сформировать заявку</button>
               <p class="form-status" data-form-status aria-live="polite"></p>
             </form>
           </div>
 
-          <aside class="calc-result" aria-live="polite">
+          <aside class="calc-result" aria-live="polite" data-request-summary>
             <span>Ориентир стоимости</span>
             <strong id="price-output">1 400 000 ₽</strong>
             <p id="calc-note">Для дома 56 м²: 7 × 8 м, 1 этаж, свайный фундамент.</p>
-            <a class="button button--light" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
-              Обсудить расчет
-            </a>
+            <dl class="summary-list">
+              <div>
+                <dt>Назначение</dt>
+                <dd data-summary-purpose>Дом для постоянного проживания</dd>
+              </div>
+              <div>
+                <dt>Комплектация</dt>
+                <dd data-summary-features>Терраса или крыльцо, свайный фундамент, коммуникации, проект в подарок</dd>
+              </div>
+              <div>
+                <dt>Связь</dt>
+                <dd data-summary-contact>WhatsApp, телефон пока не указан</dd>
+              </div>
+            </dl>
+            <div class="messenger-actions" aria-label="Прототип передачи заявки">
+              <a class="button button--light" href="https://wa.me/" target="_blank" rel="noreferrer" data-whatsapp-link>
+                WhatsApp
+              </a>
+              <button class="button button--ghost-light" type="button" data-copy-request>
+                Max
+              </button>
+              <a class="button button--ghost-light" href="#quiz" data-call-link>
+                Звонок
+              </a>
+            </div>
+            <p class="prototype-note">
+              Сейчас это прототип: WhatsApp открывает подготовленный текст заявки,
+              Max получает его через копирование. После выбора рабочего номера
+              подключается прямая отправка.
+            </p>
           </aside>
         </div>
       </section>
@@ -307,8 +411,8 @@
           <ol class="steps">
             <li>
               <span>01</span>
-              <h3>Уточняем участок</h3>
-              <p>Город, подъезд, грунт, наличие коммуникаций, желаемая площадь и назначение дома.</p>
+              <h3>Получаем заявку</h3>
+              <p>Клиент указывает телефон, район, площадь, этажность, участок и желаемую комплектацию.</p>
             </li>
             <li>
               <span>02</span>
@@ -372,15 +476,12 @@
             <p class="section-label">Контакты</p>
             <h2 id="contacts-title">Запросите расчет дома под свой участок</h2>
             <p>
-              Для точного расчета отправьте площадь, город или район, желаемую
-              планировку и что нужно включить: терраса, сантехника, коммуникации,
-              чистовая отделка.
+              Для точного расчета заполните квиз: площадь, город или район,
+              желаемую планировку и что нужно включить в проект.
             </p>
           </div>
           <div class="contact-actions">
-            <a class="button button--primary" href="https://www.avito.ru/brands/d879382e8d2c71baf21186ec607d68ce/all?src=sharing&sellerId=f685208cee7efd6be3687e1c0541012a" target="_blank" rel="noreferrer">
-              Написать на Avito
-            </a>
+            <a class="button button--primary" href="#quiz">Заполнить заявку</a>
             <p>Продавец: Baraboy Evgen · СИП-дома под заказ в Краснодаре</p>
           </div>
         </div>
@@ -394,6 +495,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260603"></script>
+    <script src="script.js?v=20260713"></script>
   </body>
 </html>

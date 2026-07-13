@@ -7,9 +7,18 @@ const priceOutput = document.querySelector("#price-output");
 const calcNote = document.querySelector("#calc-note");
 const leadForm = document.querySelector("[data-lead-form]");
 const formStatus = document.querySelector("[data-form-status]");
+const requestSummary = document.querySelector("[data-request-summary]");
+const summaryPurpose = document.querySelector("[data-summary-purpose]");
+const summaryFeatures = document.querySelector("[data-summary-features]");
+const summaryContact = document.querySelector("[data-summary-contact]");
+const whatsappLink = document.querySelector("[data-whatsapp-link]");
+const copyRequestButton = document.querySelector("[data-copy-request]");
+const callLink = document.querySelector("[data-call-link]");
 
 const PRICE_PER_METER = 25000;
 const BASE_AREA = 56;
+
+let currentLeadMessage = "";
 
 const formatPrice = (value) =>
   new Intl.NumberFormat("ru-RU", {
@@ -27,22 +36,98 @@ const setMenuOpen = (isOpen) => {
   navToggle.setAttribute("aria-expanded", String(isOpen));
 };
 
-const updateCalculator = () => {
-  const area = Number(areaRange.value);
-  const price = area * PRICE_PER_METER;
+const getSelectedFeatures = (formData) => {
+  const selected = formData.getAll("features").map((value) => String(value).trim());
+  return selected.length ? selected : ["Комплектацию нужно уточнить"];
+};
 
-  areaOutput.value = area;
-  priceOutput.textContent = formatPrice(price);
+const getFormData = () => {
+  const formData = new FormData(leadForm);
+  return {
+    name: String(formData.get("name") || "").trim(),
+    phone: String(formData.get("phone") || "").trim(),
+    purpose: String(formData.get("purpose") || "").trim(),
+    floors: String(formData.get("floors") || "").trim(),
+    plot: String(formData.get("plot") || "").trim(),
+    location: String(formData.get("location") || "").trim(),
+    contactMethod: String(formData.get("contactMethod") || "").trim(),
+    contactTime: String(formData.get("contactTime") || "").trim(),
+    message: String(formData.get("message") || "").trim(),
+    features: getSelectedFeatures(formData),
+    area: Number(areaRange.value),
+  };
+};
 
-  if (area === BASE_AREA) {
-    calcNote.textContent = "Для дома 56 м²: 7 × 8 м, 1 этаж, свайный фундамент.";
-    return;
+const normalizePhone = (phone) => phone.replace(/[^\d+]/g, "");
+
+const getPhoneDigits = (phone) => phone.replace(/\D/g, "");
+
+const buildLeadMessage = (data, price) => {
+  const lines = [
+    "Заявка на подготовку проекта СИП-дома",
+    `Имя: ${data.name || "не указано"}`,
+    `Телефон: ${data.phone || "не указан"}`,
+    `Канал связи: ${data.contactMethod || "не указан"}, ${data.contactTime || "время не указано"}`,
+    `Назначение: ${data.purpose}`,
+    `Площадь: ${data.area} м²`,
+    `Этажность: ${data.floors}`,
+    `Участок: ${data.plot}`,
+    `Город или район: ${data.location || "не указан"}`,
+    `Что включить: ${data.features.join(", ")}`,
+    `Ориентир бюджета: ${formatPrice(price)}`,
+  ];
+
+  if (data.message) {
+    lines.push(`Комментарий: ${data.message}`);
   }
 
-  calcNote.textContent =
-    area < BASE_AREA
-      ? "Компактный вариант для дачи, бани или гостевого дома."
-      : "Большая площадь требует отдельной планировки и уточнения комплектации.";
+  return lines.join("\n");
+};
+
+const updateDeliveryLinks = (message, phone) => {
+  const encodedMessage = encodeURIComponent(message);
+  const normalizedPhone = normalizePhone(phone);
+  const phoneDigits = getPhoneDigits(phone);
+
+  whatsappLink.href = `https://wa.me/?text=${encodedMessage}`;
+  callLink.href = phoneDigits.length >= 10 ? `tel:${normalizedPhone}` : "#quiz";
+};
+
+const updateCalculator = () => {
+  const data = getFormData();
+  const price = data.area * PRICE_PER_METER;
+  const phoneDigits = getPhoneDigits(data.phone);
+
+  areaOutput.value = data.area;
+  priceOutput.textContent = formatPrice(price);
+
+  if (data.area === BASE_AREA) {
+    calcNote.textContent = "Для дома 56 м²: 7 × 8 м, 1 этаж, свайный фундамент.";
+  } else {
+    calcNote.textContent =
+      data.area < BASE_AREA
+        ? "Компактный вариант для дачи, бани или гостевого дома."
+        : "Большая площадь требует отдельной планировки и уточнения комплектации.";
+  }
+
+  summaryPurpose.textContent = `${data.purpose}, ${data.floors}`;
+  summaryFeatures.textContent = data.features.join(", ");
+  summaryContact.textContent =
+    phoneDigits.length >= 10
+      ? `${data.contactMethod}, ${data.phone}`
+      : `${data.contactMethod}, телефон пока не указан`;
+
+  currentLeadMessage = buildLeadMessage(data, price);
+  updateDeliveryLinks(currentLeadMessage, data.phone);
+};
+
+const copyLeadMessage = async () => {
+  try {
+    await navigator.clipboard.writeText(currentLeadMessage);
+    formStatus.textContent = "Текст заявки скопирован. Его можно вставить в Max.";
+  } catch {
+    formStatus.textContent = currentLeadMessage;
+  }
 };
 
 window.addEventListener("scroll", updateHeader, { passive: true });
@@ -52,20 +137,24 @@ navToggle.addEventListener("click", () => {
 navLinks.forEach((link) => {
   link.addEventListener("click", () => setMenuOpen(false));
 });
-areaRange.addEventListener("input", updateCalculator);
+leadForm.addEventListener("input", updateCalculator);
+leadForm.addEventListener("change", updateCalculator);
+copyRequestButton.addEventListener("click", copyLeadMessage);
 leadForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const formData = new FormData(leadForm);
-  const name = String(formData.get("name") || "").trim();
-  const phone = String(formData.get("phone") || "").trim();
+  updateCalculator();
 
-  if (!phone) {
-    formStatus.textContent = "Добавьте телефон, чтобы заявку можно было передать продавцу.";
+  const data = getFormData();
+  const phoneDigits = getPhoneDigits(data.phone);
+
+  if (phoneDigits.length < 10) {
+    formStatus.textContent = "Добавьте корректный телефон, чтобы заявку можно было передать Евгению.";
     return;
   }
 
-  const appeal = name ? `${name}, заявка подготовлена.` : "Заявка подготовлена.";
-  formStatus.textContent = `${appeal} Сейчас ее можно отправить продавцу через Avito или подключить отправку на телефон/мессенджер.`;
+  formStatus.textContent =
+    "Заявка сформирована. Ее можно открыть в WhatsApp или скопировать для отправки в Max.";
+  requestSummary.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
 updateHeader();

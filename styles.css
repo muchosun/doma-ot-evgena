@@ -314,6 +314,17 @@ h3 {
   background: #edf1ec;
 }
 
+.button--ghost-light {
+  border-color: rgba(255, 255, 255, 0.56);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.button--ghost-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .hero__facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -578,10 +589,68 @@ input[type="range"] {
   accent-color: var(--green);
 }
 
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.option-grid label {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfbf8;
+  padding: 12px 14px;
+  color: var(--text);
+}
+
+.option-grid input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  accent-color: var(--green);
+}
+
 .lead-form {
   margin-top: 34px;
   border-top: 1px solid var(--line);
   padding-top: 28px;
+}
+
+.quiz-step {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 28px;
+}
+
+.quiz-step + .quiz-step {
+  padding-top: 28px;
+}
+
+.quiz-step legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--text);
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.quiz-step legend span {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e7efe8;
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .form-grid {
@@ -598,6 +667,15 @@ input[type="range"] {
   font-weight: 750;
 }
 
+.lead-form .range-field {
+  display: flex;
+}
+
+.lead-form .option-grid label {
+  display: flex;
+  color: var(--text);
+}
+
 .lead-form input,
 .lead-form select,
 .lead-form textarea {
@@ -610,6 +688,13 @@ input[type="range"] {
   font-size: 16px;
   font-weight: 500;
   outline: none;
+}
+
+.lead-form .option-grid input {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  padding: 0;
 }
 
 .lead-form input:focus,
@@ -657,6 +742,48 @@ input[type="range"] {
 
 .calc-result p {
   color: rgba(255, 255, 255, 0.82);
+}
+
+.summary-list {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.summary-list div {
+  padding: 14px 16px;
+  background: rgba(31, 63, 45, 0.34);
+}
+
+.summary-list dt {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.summary-list dd {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+.messenger-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.messenger-actions .button {
+  min-height: 46px;
+  padding: 0 12px;
+}
+
+.prototype-note {
+  margin-bottom: 0;
+  font-size: 14px;
 }
 
 .steps {
@@ -914,7 +1041,8 @@ details p {
 
   .project-grid,
   .kit-list,
-  .steps {
+  .steps,
+  .option-grid {
     grid-template-columns: 1fr;
   }
 
@@ -937,6 +1065,10 @@ details p {
   }
 
   .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .messenger-actions {
     grid-template-columns: 1fr;
   }
 
