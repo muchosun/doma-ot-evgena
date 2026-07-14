@@ -7,6 +7,7 @@ const priceOutput = document.querySelector("#price-output");
 const calcNote = document.querySelector("#calc-note");
 const leadForm = document.querySelector("[data-lead-form]");
 const formStatus = document.querySelector("[data-form-status]");
+const phoneInput = document.querySelector("[data-phone-input]");
 const requestSummary = document.querySelector("[data-request-summary]");
 const summaryPurpose = document.querySelector("[data-summary-purpose]");
 const summaryFeatures = document.querySelector("[data-summary-features]");
@@ -19,6 +20,7 @@ const PRICE_PER_METER = 25000;
 const BASE_AREA = 56;
 
 let currentLeadMessage = "";
+let hasSubmitted = false;
 
 const formatPrice = (value) =>
   new Intl.NumberFormat("ru-RU", {
@@ -119,6 +121,10 @@ const updateCalculator = () => {
 
   currentLeadMessage = buildLeadMessage(data, price);
   updateDeliveryLinks(currentLeadMessage, data.phone);
+
+  if (!hasSubmitted || phoneDigits >= 10) {
+    phoneInput.setAttribute("aria-invalid", "false");
+  }
 };
 
 const copyLeadMessage = async () => {
@@ -142,16 +148,20 @@ leadForm.addEventListener("change", updateCalculator);
 copyRequestButton.addEventListener("click", copyLeadMessage);
 leadForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  hasSubmitted = true;
   updateCalculator();
 
   const data = getFormData();
   const phoneDigits = getPhoneDigits(data.phone);
 
   if (phoneDigits.length < 10) {
+    phoneInput.setAttribute("aria-invalid", "true");
     formStatus.textContent = "Добавьте корректный телефон, чтобы заявку можно было передать Евгению.";
+    phoneInput.focus();
     return;
   }
 
+  phoneInput.setAttribute("aria-invalid", "false");
   formStatus.textContent =
     "Заявка сформирована. Ее можно открыть в WhatsApp или скопировать для отправки в Max.";
   requestSummary.scrollIntoView({ behavior: "smooth", block: "nearest" });

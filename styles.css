@@ -41,11 +41,55 @@ a {
   color: inherit;
 }
 
+section[id],
+main[id] {
+  scroll-margin-top: 88px;
+}
+
 button,
 input,
 select,
 textarea {
   font: inherit;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+summary {
+  touch-action: manipulation;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  transform: translateY(-140%);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--green-dark);
+  padding: 10px 14px;
+  font-weight: 850;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(179, 92, 51, 0.5);
+  outline-offset: 3px;
 }
 
 .container {
@@ -276,6 +320,7 @@ h3 {
   padding: 0 22px;
   font-weight: 800;
   text-decoration: none;
+  cursor: pointer;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -704,8 +749,23 @@ input[type="range"] {
   box-shadow: 0 0 0 3px rgba(49, 93, 67, 0.12);
 }
 
+.lead-form input[aria-invalid="true"] {
+  border-color: var(--clay-dark);
+  box-shadow: 0 0 0 3px rgba(179, 92, 51, 0.14);
+}
+
 .form-note {
   margin-top: 16px;
+}
+
+.required-mark {
+  color: var(--clay-dark);
+}
+
+.field-hint {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .lead-form .button {
