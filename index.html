@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260713" />
+    <link rel="stylesheet" href="styles.css?v=20260714" />
   </head>
   <body>
     <a class="skip-link" href="#top">Перейти к содержанию</a>
@@ -62,11 +62,11 @@
           <p class="eyebrow">Краснодар и район · под заказ</p>
           <h1 id="hero-title">СИП-дом 56 м² с&nbsp;фундаментом от 1&nbsp;400&nbsp;000&nbsp;₽</h1>
           <p class="hero__lead">
-            Начните с короткой заявки: площадь, этажность, участок, комплектация
-            и телефон для связи. На основе этих данных готовится первый расчет и проект.
+            Ответьте на 4 коротких вопроса: тип дома, площадь, участок и телефон.
+            На основе этих данных готовится первый расчет и проект.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#quiz">Заполнить заявку</a>
+            <a class="button button--primary" href="#quiz">Ответить на 4 вопроса</a>
             <a class="button button--secondary" href="#kit">Что входит</a>
           </div>
           <dl class="hero__facts" aria-label="Ключевые параметры">
@@ -270,62 +270,124 @@
         </div>
       </section>
 
-      <section class="section" id="quiz" aria-labelledby="quiz-title">
-        <div class="container calc-layout">
-          <div class="calc-panel">
-            <p class="section-label">Квиз-заявка</p>
-            <h2 id="quiz-title">Подготовим проект дома под ваш участок</h2>
-            <p>
-              Укажите базовые параметры будущего дома. Прототип сформирует текст
-              заявки, проверит телефон и подготовит передачу в WhatsApp или Max.
-            </p>
+      <section class="section quiz-section" id="quiz" aria-labelledby="quiz-title">
+        <div class="container calc-layout quiz-layout">
+          <div class="calc-panel quiz-panel">
+            <div class="quiz-heading">
+              <p class="section-label">Квиз-заявка</p>
+              <h2 id="quiz-title">Подготовим проект дома под ваш участок</h2>
+              <p>
+                Короткий мобильный квиз: выберите тип дома, площадь, участок и
+                оставьте телефон. Прототип сформирует текст заявки для WhatsApp или Max.
+              </p>
+            </div>
 
-            <form class="lead-form" data-lead-form novalidate>
-              <fieldset class="quiz-step">
-                <legend><span>01</span> Дом и участок</legend>
-                <div class="form-grid">
-                  <label>
-                    <span>Назначение</span>
-                    <select name="purpose">
-                      <option>Дом для постоянного проживания</option>
-                      <option>Дача на сезон</option>
-                      <option>Гостевой дом</option>
-                      <option>Баня или хозяйственная постройка</option>
-                    </select>
-                  </label>
-                  <label>
-                    <span>Этажность</span>
-                    <select name="floors">
-                      <option>1 этаж</option>
-                      <option>1 этаж + мансарда</option>
-                      <option>2 этажа</option>
-                      <option>Пока не решили</option>
-                    </select>
-                  </label>
-                  <label>
-                    <span>Участок</span>
-                    <select name="plot">
-                      <option>Участок уже есть</option>
-                      <option>Участок в подборе</option>
-                      <option>Нужна консультация по участку</option>
-                    </select>
-                  </label>
-                  <label>
-                    <span>Город или район</span>
-                    <input type="text" name="location" placeholder="Например, Краснодарский край" />
-                  </label>
+            <form class="lead-form quiz-wizard" data-lead-form novalidate>
+              <input type="hidden" name="purpose" value="Дом для постоянного проживания" data-hidden-field="purpose" />
+              <input type="hidden" name="floors" value="1 этаж" data-hidden-field="floors" />
+              <input type="hidden" name="plot" value="Участок уже есть" data-hidden-field="plot" />
+              <input type="hidden" name="contactMethod" value="WhatsApp" data-hidden-field="contactMethod" />
+              <input type="hidden" name="contactTime" value="Сегодня" data-hidden-field="contactTime" />
+
+              <div class="quiz-progress" aria-label="Прогресс заявки">
+                <div class="step-counter">
+                  <span id="step-count">1 / 4</span>
+                  <strong id="step-label">Тип дома</strong>
                 </div>
+                <div class="progress-dots">
+                  <button class="is-active" type="button" data-step-nav="0" aria-label="Шаг 1">1</button>
+                  <button type="button" data-step-nav="1" aria-label="Шаг 2" disabled>2</button>
+                  <button type="button" data-step-nav="2" aria-label="Шаг 3" disabled>3</button>
+                  <button type="button" data-step-nav="3" aria-label="Шаг 4" disabled>4</button>
+                </div>
+                <div class="quiz-progressbar" aria-hidden="true"><span data-progress-bar></span></div>
+              </div>
 
-                <label class="range-field" for="area-range">
-                  <span>Планируемая площадь</span>
-                  <strong><output id="area-output" for="area-range">56</output> м²</strong>
-                </label>
-                <input id="area-range" type="range" name="area" min="24" max="140" step="1" value="56" />
+              <fieldset class="quiz-step is-active" data-quiz-step="0">
+                <legend><span>01</span> Какой дом нужен?</legend>
+                <p class="quiz-step__hint">Выберите ближайший вариант. После клика сразу перейдем к площади.</p>
+                <div class="choice-grid choice-grid--media">
+                  <button
+                    class="choice-card is-selected"
+                    type="button"
+                    data-preset
+                    data-purpose="Дом для постоянного проживания"
+                    data-floors="1 этаж"
+                    data-area="56"
+                  >
+                    <img src="assets/project-56.jpg" width="1536" height="1024" alt="Одноэтажный СИП-дом 56 квадратных метров" loading="lazy" decoding="async" />
+                    <span><strong>Дом 56 м²</strong><small>базовый вариант из объявления</small></span>
+                  </button>
+                  <button
+                    class="choice-card"
+                    type="button"
+                    data-preset
+                    data-purpose="Дом для постоянного проживания"
+                    data-floors="1 этаж + мансарда"
+                    data-area="72"
+                  >
+                    <img src="assets/project-family.jpg" width="1536" height="1024" alt="СИП-дом с мансардой для семьи" loading="lazy" decoding="async" />
+                    <span><strong>Для семьи</strong><small>от 72 м², можно с мансардой</small></span>
+                  </button>
+                  <button
+                    class="choice-card"
+                    type="button"
+                    data-preset
+                    data-purpose="Гостевой дом"
+                    data-floors="1 этаж"
+                    data-area="40"
+                  >
+                    <img src="assets/project-bath.jpg" width="1536" height="1024" alt="Компактный гостевой дом на участке" loading="lazy" decoding="async" />
+                    <span><strong>Гостевой</strong><small>компактный дом на участок</small></span>
+                  </button>
+                  <button
+                    class="choice-card"
+                    type="button"
+                    data-preset
+                    data-purpose="Баня или хозяйственная постройка"
+                    data-floors="1 этаж"
+                    data-area="24"
+                  >
+                    <img src="assets/project-bath.jpg" width="1536" height="1024" alt="Компактная деревянная баня или хозяйственная постройка" loading="lazy" decoding="async" />
+                    <span><strong>Баня</strong><small>от 24 м², расчет по задаче</small></span>
+                  </button>
+                </div>
               </fieldset>
 
-              <fieldset class="quiz-step">
-                <legend><span>02</span> Что включить в проект</legend>
-                <div class="option-grid">
+              <fieldset class="quiz-step" data-quiz-step="1" hidden>
+                <legend><span>02</span> Площадь и участок</legend>
+                <p class="quiz-step__hint">Площадь можно выбрать одним нажатием или указать свою.</p>
+                <div class="area-grid" aria-label="Быстрый выбор площади">
+                  <button class="is-selected" type="button" data-area-option="56"><strong>56</strong><span>м²</span></button>
+                  <button type="button" data-area-option="72"><strong>72</strong><span>м²</span></button>
+                  <button type="button" data-area-option="90"><strong>90</strong><span>м²</span></button>
+                  <button type="button" data-area-option="24"><strong>24</strong><span>м²</span></button>
+                </div>
+                <div class="form-grid form-grid--compact">
+                  <label class="form-field" for="area-input">
+                    <span>Своя площадь, м²</span>
+                    <input id="area-input" type="number" name="area" min="24" max="180" step="1" value="56" inputmode="numeric" />
+                  </label>
+                  <label class="form-field" for="location-input">
+                    <span>Город или район</span>
+                    <input id="location-input" type="text" name="location" placeholder="Например, Краснодар" autocomplete="address-level2" />
+                  </label>
+                </div>
+                <div class="choice-grid choice-grid--compact" aria-label="Статус участка">
+                  <button class="choice-pill is-selected" type="button" data-choice-name="plot" data-choice-value="Участок уже есть">Участок есть</button>
+                  <button class="choice-pill" type="button" data-choice-name="plot" data-choice-value="Участок в подборе">В подборе</button>
+                  <button class="choice-pill" type="button" data-choice-name="plot" data-choice-value="Нужна консультация по участку">Нужна консультация</button>
+                </div>
+                <div class="quiz-controls">
+                  <button class="button button--quiet" type="button" data-prev-step>Назад</button>
+                  <button class="button button--primary" type="button" data-next-step>Дальше</button>
+                </div>
+              </fieldset>
+
+              <fieldset class="quiz-step" data-quiz-step="2" hidden>
+                <legend><span>03</span> Что включить?</legend>
+                <p class="quiz-step__hint">Базовые пункты уже выбраны. Лишнее можно снять.</p>
+                <div class="option-grid option-grid--compact">
                   <label>
                     <input type="checkbox" name="features" value="Терраса или крыльцо" checked />
                     <span>Терраса или крыльцо</span>
@@ -339,68 +401,73 @@
                     <span>Коммуникации</span>
                   </label>
                   <label>
+                    <input type="checkbox" name="features" value="Проект в подарок" checked />
+                    <span>Проект в подарок</span>
+                  </label>
+                  <label>
                     <input type="checkbox" name="features" value="Чистовая отделка" />
                     <span>Чистовая отделка</span>
                   </label>
                   <label>
                     <input type="checkbox" name="features" value="Индивидуальная планировка" />
-                    <span>Индивидуальная планировка</span>
-                  </label>
-                  <label>
-                    <input type="checkbox" name="features" value="Проект в подарок" checked />
-                    <span>Проект в подарок</span>
+                    <span>Своя планировка</span>
                   </label>
                 </div>
-                <label class="form-note">
-                  <span>Комментарий к дому</span>
-                  <textarea name="message" rows="4" placeholder="Размер участка, желаемая планировка, сроки, особенности подъезда"></textarea>
-                </label>
+                <details class="extra-note">
+                  <summary>Добавить комментарий</summary>
+                  <label class="form-note" for="message-input">
+                    <span>Комментарий к дому</span>
+                    <textarea id="message-input" name="message" rows="3" placeholder="Размер участка, сроки, особенности подъезда"></textarea>
+                  </label>
+                </details>
+                <div class="quiz-controls">
+                  <button class="button button--quiet" type="button" data-prev-step>Назад</button>
+                  <button class="button button--primary" type="button" data-next-step>К контактам</button>
+                </div>
               </fieldset>
 
-              <fieldset class="quiz-step">
-                <legend><span>03</span> Контакт для связи</legend>
-                <div class="form-grid">
-                  <label>
-                    <span>Имя</span>
-                    <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
-                  </label>
-                  <label>
+              <fieldset class="quiz-step" data-quiz-step="3" hidden>
+                <legend><span>04</span> Куда отправить расчет?</legend>
+                <p class="quiz-step__hint">Телефон нужен, чтобы Евгений смог сверить вводные и отправить расчет.</p>
+                <div class="form-grid form-grid--compact">
+                  <label class="form-field" for="phone-input">
                     <span>Телефон <span class="required-mark" aria-hidden="true">*</span></span>
                     <input
+                      id="phone-input"
                       type="tel"
                       name="phone"
                       autocomplete="tel"
+                      inputmode="tel"
                       placeholder="+7 900 000-00-00"
                       aria-describedby="phone-hint form-status"
                       aria-invalid="false"
                       required
                       data-phone-input
                     />
-                    <small class="field-hint" id="phone-hint">Нужен для передачи заявки Евгению.</small>
+                    <small class="field-hint" id="phone-hint">Обязательное поле для передачи заявки.</small>
                   </label>
-                  <label>
-                    <span>Куда удобнее ответить</span>
-                    <select name="contactMethod">
-                      <option>WhatsApp</option>
-                      <option>Max</option>
-                      <option>Звонок</option>
-                      <option>SMS</option>
-                    </select>
-                  </label>
-                  <label>
-                    <span>Когда связаться</span>
-                    <select name="contactTime">
-                      <option>Сегодня</option>
-                      <option>Завтра</option>
-                      <option>В будний день</option>
-                      <option>После 18:00</option>
-                    </select>
+                  <label class="form-field" for="name-input">
+                    <span>Имя</span>
+                    <input id="name-input" type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" />
                   </label>
                 </div>
+                <div class="choice-grid choice-grid--compact" aria-label="Канал связи">
+                  <button class="choice-pill is-selected" type="button" data-choice-name="contactMethod" data-choice-value="WhatsApp">WhatsApp</button>
+                  <button class="choice-pill" type="button" data-choice-name="contactMethod" data-choice-value="Max">Max</button>
+                  <button class="choice-pill" type="button" data-choice-name="contactMethod" data-choice-value="Звонок">Звонок</button>
+                  <button class="choice-pill" type="button" data-choice-name="contactMethod" data-choice-value="SMS">SMS</button>
+                </div>
+                <div class="choice-grid choice-grid--compact" aria-label="Когда связаться">
+                  <button class="choice-pill is-selected" type="button" data-choice-name="contactTime" data-choice-value="Сегодня">Сегодня</button>
+                  <button class="choice-pill" type="button" data-choice-name="contactTime" data-choice-value="Завтра">Завтра</button>
+                  <button class="choice-pill" type="button" data-choice-name="contactTime" data-choice-value="После 18:00">После 18:00</button>
+                </div>
+                <div class="quiz-controls">
+                  <button class="button button--quiet" type="button" data-prev-step>Назад</button>
+                  <button class="button button--primary" type="submit">Сформировать заявку</button>
+                </div>
+                <p class="form-status" id="form-status" data-form-status aria-live="polite"></p>
               </fieldset>
-
-              <button class="button button--primary" type="submit">Сформировать заявку</button>
-              <p class="form-status" id="form-status" data-form-status aria-live="polite"></p>
             </form>
           </div>
 
@@ -528,6 +595,10 @@
       </section>
     </main>
 
+    <div class="mobile-quick-cta" data-mobile-cta>
+      <a class="button button--primary" href="#quiz">Заполнить заявку</a>
+    </div>
+
     <footer class="site-footer">
       <div class="container footer-layout">
         <p>Baraboy Evgen · СИП-дома под заказ в Краснодаре</p>
@@ -535,6 +606,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260713"></script>
+    <script src="script.js?v=20260714"></script>
   </body>
 </html>
