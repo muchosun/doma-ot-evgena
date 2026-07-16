@@ -3,6 +3,10 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const navLinks = document.querySelectorAll(".main-nav a");
 const quizSection = document.querySelector("#quiz");
 const mobileQuickCta = document.querySelector("[data-mobile-cta]");
+const quizModal = document.querySelector("[data-quiz-modal]");
+const quizSheet = document.querySelector(".quiz-sheet");
+const quizOpenButtons = [...document.querySelectorAll("[data-quiz-open]")];
+const quizCloseButtons = [...document.querySelectorAll("[data-quiz-close]")];
 const leadForm = document.querySelector("[data-lead-form]");
 const formStatus = document.querySelector("[data-form-status]");
 const phoneInput = document.querySelector("[data-phone-input]");
@@ -28,14 +32,16 @@ const stepCount = document.querySelector("#step-count");
 const stepLabel = document.querySelector("#step-label");
 const progressBar = document.querySelector("[data-progress-bar]");
 
-const PRICE_PER_METER = 25000;
+const BASE_PRICE_PER_METER = 30000;
+const TURNKEY_PRICE_PER_METER = 45000;
 const BASE_AREA = 56;
-const STEP_LABELS = ["Тип дома", "Площадь и участок", "Комплект", "Телефон"];
+const STEP_LABELS = ["Дом", "Участок и комплект", "Телефон"];
 
 let currentLeadMessage = "";
 let hasSubmitted = false;
 let currentStep = 0;
 let maxStep = 0;
+let lastQuizTrigger = null;
 
 const formatPrice = (value) =>
   new Intl.NumberFormat("ru-RU", {
@@ -56,6 +62,26 @@ const updateMobileCta = () => {
 const setMenuOpen = (isOpen) => {
   header.classList.toggle("is-menu-open", isOpen);
   navToggle.setAttribute("aria-expanded", String(isOpen));
+};
+
+const openQuiz = (trigger = null) => {
+  lastQuizTrigger = trigger;
+  quizModal.classList.add("is-open");
+  quizModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("is-quiz-open");
+  setMenuOpen(false);
+  setTimeout(() => {
+    const activeStep = quizSteps[currentStep];
+    const focusTarget = activeStep?.querySelector(".is-selected:not([disabled]), button:not([disabled]), input, textarea");
+    focusTarget?.focus({ preventScroll: true });
+  }, 120);
+};
+
+const closeQuiz = () => {
+  quizModal.classList.remove("is-open");
+  quizModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("is-quiz-open");
+  lastQuizTrigger?.focus?.({ preventScroll: true });
 };
 
 const setHiddenField = (name, value) => {
@@ -82,6 +108,7 @@ const getFormData = () => {
     purpose: String(formData.get("purpose") || "").trim(),
     floors: String(formData.get("floors") || "").trim(),
     plot: String(formData.get("plot") || "").trim(),
+    finish: String(formData.get("finish") || "Базовый домокомплект").trim(),
     location: String(formData.get("location") || "").trim(),
     contactMethod: String(formData.get("contactMethod") || "").trim(),
     contactTime: String(formData.get("contactTime") || "").trim(),
@@ -90,6 +117,9 @@ const getFormData = () => {
     area: normalizeArea(formData.get("area") || BASE_AREA),
   };
 };
+
+const getPricePerMeter = (finish) =>
+  finish.toLowerCase().includes("под ключ") ? TURNKEY_PRICE_PER_METER : BASE_PRICE_PER_METER;
 
 const normalizePhone = (phone) => phone.replace(/[^\d+]/g, "");
 
@@ -113,7 +143,7 @@ const formatPhone = (value) => {
   return `+7 (${parts[0]}) ${parts[1]}-${parts[2]}-${parts[3]}`;
 };
 
-const buildLeadMessage = (data, price) => {
+const buildLeadMessage = (data, price, pricePerMeter) => {
   const lines = [
     "Заявка на подготовку проекта СИП-дома",
     `Имя: ${data.name || "не указано"}`,
@@ -124,8 +154,9 @@ const buildLeadMessage = (data, price) => {
     `Этажность: ${data.floors}`,
     `Участок: ${data.plot}`,
     `Город или район: ${data.location || "не указан"}`,
-    `Что включить: ${data.features.join(", ")}`,
-    `Ориентир бюджета: ${formatPrice(price)}`,
+    `Комплектация: ${data.finish}`,
+    `Что входит в базу: ${data.features.join(", ")}`,
+    `Ориентир: ${formatPrice(price)} (${formatPrice(pricePerMeter)} за м²)`,
   ];
 
   if (data.message) {
@@ -146,6 +177,7 @@ const updateDeliveryLinks = (message, phone) => {
 
 const syncActiveChoices = () => {
   const data = getFormData();
+  const formData = new FormData(leadForm);
 
   presetButtons.forEach((button) => {
     const isSelected =
@@ -164,7 +196,7 @@ const syncActiveChoices = () => {
 
   choiceButtons.forEach((button) => {
     const fieldName = button.dataset.choiceName;
-    const formValue = String(new FormData(leadForm).get(fieldName) || "");
+    const formValue = String(formData.get(fieldName) || "");
     const isSelected = button.dataset.choiceValue === formValue;
     button.classList.toggle("is-selected", isSelected);
     button.setAttribute("aria-pressed", String(isSelected));
@@ -173,7 +205,8 @@ const syncActiveChoices = () => {
 
 const updateCalculator = () => {
   const data = getFormData();
-  const price = data.area * PRICE_PER_METER;
+  const pricePerMeter = getPricePerMeter(data.finish);
+  const price = data.area * pricePerMeter;
   const phoneDigits = getPhoneDigits(data.phone);
 
   if (document.activeElement !== areaInput && String(areaInput.value) !== String(data.area)) {
@@ -182,7 +215,9 @@ const updateCalculator = () => {
 
   priceOutput.textContent = formatPrice(price);
 
-  if (data.area === BASE_AREA) {
+  if (data.finish.toLowerCase().includes("под ключ")) {
+    calcNote.textContent = "Дом под ключ считается отдельно: ориентир от 45 000 ₽/м², состав фиксируется в смете.";
+  } else if (data.area === BASE_AREA) {
     calcNote.textContent = "Для дома 56 м²: 7 × 8 м, 1 этаж, свайный фундамент.";
   } else {
     calcNote.textContent =
@@ -192,13 +227,13 @@ const updateCalculator = () => {
   }
 
   summaryPurpose.textContent = `${data.purpose}, ${data.floors}, ${data.plot}`;
-  summaryFeatures.textContent = data.features.join(", ");
+  summaryFeatures.textContent = `${data.finish}, ввод коммуникаций, рабочий проект в подарок`;
   summaryContact.textContent =
     phoneDigits.length >= 10
       ? `${data.contactMethod}, ${data.phone}`
       : `${data.contactMethod}, телефон пока не указан`;
 
-  currentLeadMessage = buildLeadMessage(data, price);
+  currentLeadMessage = buildLeadMessage(data, price, pricePerMeter);
   updateDeliveryLinks(currentLeadMessage, data.phone);
   syncActiveChoices();
 
@@ -246,9 +281,9 @@ const setArea = (value) => {
 const copyLeadMessage = async () => {
   try {
     await navigator.clipboard.writeText(currentLeadMessage);
-    formStatus.textContent = "Текст заявки скопирован. Его можно вставить в Max.";
+    if (formStatus) formStatus.textContent = "Текст заявки скопирован. Его можно вставить в Max.";
   } catch {
-    formStatus.textContent = currentLeadMessage;
+    if (formStatus) formStatus.textContent = currentLeadMessage;
   }
 };
 
@@ -265,6 +300,23 @@ navToggle.addEventListener("click", () => {
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => setMenuOpen(false));
+});
+
+quizOpenButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    openQuiz(button);
+  });
+});
+
+quizCloseButtons.forEach((button) => {
+  button.addEventListener("click", closeQuiz);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && quizModal.classList.contains("is-open")) {
+    closeQuiz();
+  }
 });
 
 presetButtons.forEach((button) => {
@@ -339,6 +391,7 @@ leadForm.addEventListener("submit", (event) => {
   phoneInput.setAttribute("aria-invalid", "false");
   formStatus.textContent =
     "Заявка сформирована. Ее можно открыть в WhatsApp или скопировать для отправки в Max.";
+  closeQuiz();
   requestSummary.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
