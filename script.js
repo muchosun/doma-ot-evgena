@@ -23,8 +23,10 @@ const stepLabel = document.querySelector("#step-label");
 const progressBar = document.querySelector("[data-progress-bar]");
 const successPhone = document.querySelector("[data-success-phone]");
 const mobileActionBubble = document.querySelector("[data-mobile-action-bubble]");
+const callbackCountdown = document.querySelector("[data-callback-countdown]");
 
 const BASE_AREA = 56;
+const CALLBACK_TIMER_SECONDS = 120;
 const STEP_LABELS = ["Назначение", "Площадь и этажность", "Телефон"];
 const mobileBubbleMedia = window.matchMedia("(max-width: 760px)");
 
@@ -33,6 +35,8 @@ let maxStep = 0;
 let lastQuizTrigger = null;
 let hasSubmitted = false;
 let mobileBubbleTicking = false;
+let callbackTimerId = null;
+let callbackTimerRemaining = CALLBACK_TIMER_SECONDS;
 
 const updateHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -57,6 +61,41 @@ const requestMobileActionBubbleUpdate = () => {
     updateMobileActionBubble();
     mobileBubbleTicking = false;
   });
+};
+
+const formatCountdown = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const rest = seconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+};
+
+const renderCallbackTimer = () => {
+  if (callbackCountdown) {
+    callbackCountdown.textContent = formatCountdown(callbackTimerRemaining);
+  }
+};
+
+const stopCallbackTimer = () => {
+  if (callbackTimerId) {
+    clearInterval(callbackTimerId);
+    callbackTimerId = null;
+  }
+};
+
+const resetCallbackTimer = () => {
+  stopCallbackTimer();
+  callbackTimerRemaining = CALLBACK_TIMER_SECONDS;
+  renderCallbackTimer();
+};
+
+const startCallbackTimer = () => {
+  if (!callbackCountdown || callbackTimerId) return;
+  renderCallbackTimer();
+  callbackTimerId = window.setInterval(() => {
+    callbackTimerRemaining = Math.max(0, callbackTimerRemaining - 1);
+    renderCallbackTimer();
+    if (callbackTimerRemaining === 0) stopCallbackTimer();
+  }, 1000);
 };
 
 const setMenuOpen = (isOpen) => {
@@ -165,6 +204,7 @@ const resetQuiz = () => {
   leadForm.hidden = false;
   quizSuccess.hidden = true;
   formStatus.textContent = "";
+  resetCallbackTimer();
   setStep(0, false);
   syncChoices();
 };
@@ -197,6 +237,7 @@ const closeQuiz = () => {
   quizModal.classList.remove("is-open");
   quizModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("is-quiz-open");
+  resetCallbackTimer();
   requestMobileActionBubbleUpdate();
   lastQuizTrigger?.focus?.({ preventScroll: true });
 };
@@ -222,6 +263,12 @@ const setStep = (nextStep, shouldFocus = true) => {
   stepLabel.textContent = STEP_LABELS[step];
   progressBar.style.width = `${((step + 1) / quizSteps.length) * 100}%`;
 
+  if (step === quizSteps.length - 1) {
+    startCallbackTimer();
+  } else {
+    resetCallbackTimer();
+  }
+
   if (shouldFocus) {
     const activeStep = quizSteps[step];
     const focusTarget =
@@ -240,6 +287,7 @@ const setArea = (value, shouldSync = true) => {
 const showSuccess = () => {
   const data = syncChoices();
   buildLeadMessage(data);
+  stopCallbackTimer();
   leadForm.hidden = true;
   quizSuccess.hidden = false;
   if (successPhone) {

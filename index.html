@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260717-production-proof" />
+    <link rel="stylesheet" href="styles.css?v=20260717-approval-round" />
   </head>
   <body>
     <a class="skip-link" href="#top">Перейти к содержанию</a>
@@ -64,19 +64,18 @@
         <div class="hero__shade" aria-hidden="true"></div>
         <div class="hero__content">
           <p class="eyebrow">Собственное производство СИП-панелей</p>
-          <h1 id="hero-title">Постройте дом мечты из СИП-панелей</h1>
+          <h1 id="hero-title">Построим вам дом мечты из СИП-панелей в Краснодаре</h1>
           <p class="hero__lead">
-            Теплый, легкий и быстрый в строительстве дом для жизни за городом.
-            Подберем формат под ваш участок, подготовим понятную комплектацию
-            и поможем пройти путь от идеи до стройки без лишних переплат.
+            Подберем проект под участок, подготовим домокомплект на своем
+            производстве и доведем строительство до результата.
           </p>
           <div class="hero__actions">
             <a class="button button--primary" href="#quiz" data-quiz-open>Заказать расчет</a>
           </div>
           <div class="hero__badges" aria-label="Ключевые преимущества">
-            <span>Панели собственного производства</span>
-            <span>Проектируем дом под участок</span>
-            <span>Полный комплект и строительство под ключ</span>
+            <span>Свое производство</span>
+            <span>Проект под участок</span>
+            <span>Комплект и стройка под ключ</span>
           </div>
         </div>
       </section>
@@ -177,9 +176,8 @@
             <p class="section-label">Комплектация</p>
             <h2 id="kit-title">Что вы приобретаете у нас</h2>
             <p>
-              После согласования проекта и условий вы получаете понятную
-              комплектацию дома. Подробности по размерам, отделке и дополнительным
-              работам уточняются на консультации.
+              Базовый состав дома фиксируем заранее. Размеры, отделку и
+              дополнительные работы уточняем на консультации.
             </p>
             <a class="button button--quiet" href="#quiz" data-quiz-open>Уточнить комплектацию</a>
           </div>
@@ -369,12 +367,7 @@
         <div class="container">
           <div class="section-head">
             <p class="section-label">Отзывы</p>
-            <h2 id="reviews-title">Клиенты отмечают сроки, качество и связь на каждом этапе</h2>
-            <p>
-              Собрали короткие выдержки из отзывов клиентов на Авито:
-              подтвержденные сделки, оценка 5 из 5 и фокус на качестве,
-              сроках и связи.
-            </p>
+            <h2 id="reviews-title">Что о нас думают клиенты</h2>
           </div>
 
           <div class="reviews-track" aria-label="Отзывы клиентов">
@@ -526,7 +519,7 @@
             <a class="button button--light" href="#quiz" data-quiz-open>WhatsApp</a>
             <a class="button button--ghost-light" href="#quiz" data-quiz-open>Max</a>
             <a class="button button--ghost-light" href="#quiz" data-quiz-open>Telegram</a>
-            <a class="button button--ghost-light" href="#quiz" data-quiz-open>Позвонить</a>
+            <a class="button button--ghost-light" href="#contacts" data-call-link>Позвонить</a>
           </div>
         </div>
       </section>
@@ -534,7 +527,7 @@
 
     <div class="mobile-action-bubble" data-mobile-action-bubble aria-label="Быстрые действия">
       <a class="mobile-action-bubble__primary" href="#quiz" data-quiz-open>Сделать расчет</a>
-      <a class="mobile-action-bubble__phone" href="#contacts" aria-label="Перейти к контактам">
+      <a class="mobile-action-bubble__phone" href="#contacts" aria-label="Позвонить" data-call-link>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.7 3.8 8.8 8c.2.5.1 1.1-.3 1.5l-1 1c1.1 2.3 2.8 4 5.1 5.1l1-1c.4-.4 1-.5 1.5-.3l4.2 2.1c.5.2.8.7.8 1.2v2.1c0 .8-.6 1.4-1.4 1.4C10 21.1 2.9 14 2.9 5.3c0-.8.6-1.4 1.4-1.4h2.4Z" />
         </svg>
@@ -646,6 +639,11 @@
             <fieldset class="quiz-step" data-quiz-step="2" hidden>
               <legend><span>03</span> Ваш телефон</legend>
               <p class="quiz-step__hint">Оставьте номер. Специалист свяжется с вами и расскажет подробности постройки дома.</p>
+              <div class="callback-timer" aria-live="polite" data-callback-timer>
+                <span class="callback-timer__dot" aria-hidden="true"></span>
+                <span>Оператор ждет ваш телефон, чтобы перезвонить</span>
+                <strong data-callback-countdown>02:00</strong>
+              </div>
               <label class="form-field form-field--single" for="phone-input">
                 <span>Телефон <span class="required-mark" aria-hidden="true">*</span></span>
                 <input
@@ -696,6 +694,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260717-production-proof"></script>
+    <script src="script.js?v=20260717-approval-round"></script>
   </body>
 </html>

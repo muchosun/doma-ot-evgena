@@ -300,9 +300,9 @@ p {
 }
 
 h1 {
-  max-width: 700px;
+  max-width: 860px;
   margin-bottom: 22px;
-  font-size: 78px;
+  font-size: clamp(52px, 5.8vw, 78px);
   line-height: 0.95;
   letter-spacing: 0;
 }
@@ -321,7 +321,7 @@ h3 {
 }
 
 .hero__lead {
-  max-width: 640px;
+  max-width: 600px;
   margin-bottom: 30px;
   color: rgba(255, 255, 255, 0.9);
   font-size: 22px;
@@ -605,7 +605,7 @@ h3 {
 .kit-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-  gap: 44px;
+  gap: 34px;
   align-items: start;
 }
 
@@ -621,7 +621,7 @@ h3 {
 }
 
 .kit-item {
-  min-height: 174px;
+  min-height: 150px;
   display: grid;
   grid-template-columns: 58px minmax(0, 1fr);
   gap: 16px;
@@ -1010,6 +1010,34 @@ h3 {
   color: var(--muted);
   font-size: 13px;
   font-weight: 600;
+}
+
+.callback-timer {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid rgba(49, 93, 67, 0.18);
+  border-radius: var(--radius);
+  background: #eef4ee;
+  color: var(--green-dark);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.callback-timer__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--clay);
+  box-shadow: 0 0 0 5px rgba(179, 92, 51, 0.12);
+}
+
+.callback-timer strong {
+  font-variant-numeric: tabular-nums;
+  font-size: 17px;
+  line-height: 1;
 }
 
 .quiz-controls {
@@ -1705,7 +1733,7 @@ details p {
   h1 {
     max-width: min(100%, 360px);
     margin-bottom: 16px;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1.04;
   }
 
@@ -1824,29 +1852,35 @@ details p {
   }
 
   .kit-list {
-    gap: 12px;
+    gap: 8px;
   }
 
   .kit-item {
     min-height: auto;
-    grid-template-columns: 48px minmax(0, 1fr);
-    gap: 12px;
-    padding: 16px;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+    padding: 13px;
   }
 
   .kit-item__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
   }
 
   .kit-item__icon svg {
-    width: 29px;
-    height: 29px;
+    width: 24px;
+    height: 24px;
   }
 
   .kit-item h3 {
-    font-size: 18px;
+    margin-bottom: 3px;
+    font-size: 16px;
+  }
+
+  .kit-item p {
+    font-size: 14px;
+    line-height: 1.35;
   }
 
   .section-head--sticky {
@@ -1930,6 +1964,23 @@ details p {
 
   .quiz-step__hint {
     font-size: 14px;
+  }
+
+  .callback-timer {
+    grid-template-columns: 9px minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 11px 12px;
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .callback-timer__dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .callback-timer strong {
+    font-size: 16px;
   }
 
   .choice-grid--media {
