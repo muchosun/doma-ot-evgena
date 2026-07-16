@@ -22,17 +22,41 @@ const stepCount = document.querySelector("#step-count");
 const stepLabel = document.querySelector("#step-label");
 const progressBar = document.querySelector("[data-progress-bar]");
 const successPhone = document.querySelector("[data-success-phone]");
+const mobileActionBubble = document.querySelector("[data-mobile-action-bubble]");
 
 const BASE_AREA = 56;
 const STEP_LABELS = ["Назначение", "Площадь и этажность", "Телефон"];
+const mobileBubbleMedia = window.matchMedia("(max-width: 760px)");
 
 let currentStep = 0;
 let maxStep = 0;
 let lastQuizTrigger = null;
 let hasSubmitted = false;
+let mobileBubbleTicking = false;
 
 const updateHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 12);
+};
+
+const updateMobileActionBubble = () => {
+  if (!mobileActionBubble) return;
+
+  const shouldShow =
+    mobileBubbleMedia.matches &&
+    window.scrollY > window.innerHeight * 0.82 &&
+    !quizModal.classList.contains("is-open");
+
+  mobileActionBubble.classList.toggle("is-visible", shouldShow);
+};
+
+const requestMobileActionBubbleUpdate = () => {
+  if (!mobileActionBubble || mobileBubbleTicking) return;
+  mobileBubbleTicking = true;
+
+  window.requestAnimationFrame(() => {
+    updateMobileActionBubble();
+    mobileBubbleTicking = false;
+  });
 };
 
 const setMenuOpen = (isOpen) => {
@@ -151,6 +175,7 @@ const openQuiz = (trigger = null) => {
   quizModal.classList.add("is-open");
   quizModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("is-quiz-open");
+  updateMobileActionBubble();
   setMenuOpen(false);
 
   const presetValue = trigger?.dataset?.presetOpen;
@@ -172,6 +197,7 @@ const closeQuiz = () => {
   quizModal.classList.remove("is-open");
   quizModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("is-quiz-open");
+  requestMobileActionBubbleUpdate();
   lastQuizTrigger?.focus?.({ preventScroll: true });
 };
 
@@ -230,7 +256,10 @@ const showSuccess = () => {
 
 window.addEventListener("scroll", () => {
   updateHeader();
+  requestMobileActionBubbleUpdate();
 }, { passive: true });
+
+window.addEventListener("resize", requestMobileActionBubbleUpdate);
 
 navToggle.addEventListener("click", () => {
   setMenuOpen(!header.classList.contains("is-menu-open"));
@@ -321,5 +350,6 @@ leadForm.addEventListener("submit", (event) => {
 });
 
 updateHeader();
+updateMobileActionBubble();
 syncChoices();
 setStep(0, false);

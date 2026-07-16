@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260717-polish" />
+    <link rel="stylesheet" href="styles.css?v=20260717-mobile-bubble" />
   </head>
   <body>
     <a class="skip-link" href="#top">Перейти к содержанию</a>
@@ -524,6 +524,15 @@
       </section>
     </main>
 
+    <div class="mobile-action-bubble" data-mobile-action-bubble aria-label="Быстрые действия">
+      <a class="mobile-action-bubble__primary" href="#quiz" data-quiz-open>Сделать расчет</a>
+      <a class="mobile-action-bubble__phone" href="#contacts" aria-label="Перейти к контактам">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.7 3.8 8.8 8c.2.5.1 1.1-.3 1.5l-1 1c1.1 2.3 2.8 4 5.1 5.1l1-1c.4-.4 1-.5 1.5-.3l4.2 2.1c.5.2.8.7.8 1.2v2.1c0 .8-.6 1.4-1.4 1.4C10 21.1 2.9 14 2.9 5.3c0-.8.6-1.4 1.4-1.4h2.4Z" />
+        </svg>
+      </a>
+    </div>
+
     <div id="quiz" class="anchor-target" aria-hidden="true"></div>
 
     <div class="quiz-modal" id="quiz-modal" aria-hidden="true" data-quiz-modal>
@@ -679,6 +688,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260717-polish"></script>
+    <script src="script.js?v=20260717-mobile-bubble"></script>
   </body>
 </html>
