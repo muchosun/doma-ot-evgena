@@ -120,7 +120,7 @@ summary:focus-visible {
   left: 0;
   right: 0;
   display: grid;
-  grid-template-columns: minmax(210px, 1fr) auto minmax(92px, 1fr);
+  grid-template-columns: minmax(210px, 1fr) auto minmax(170px, 1fr);
   align-items: center;
   gap: 20px;
   min-height: 72px;
@@ -855,6 +855,7 @@ h3 {
   width: 100%;
   height: 132px;
   object-fit: cover;
+  object-position: center;
 }
 
 .choice-card span {
@@ -1116,7 +1117,11 @@ h3 {
 .quiz-card__top {
   display: grid;
   gap: 12px;
-  padding-right: 54px;
+  padding-right: 0;
+}
+
+.quiz-sheet .step-counter {
+  padding-right: 62px;
 }
 
 .quiz-sheet .lead-form {
@@ -1162,6 +1167,17 @@ h3 {
   max-width: 560px;
   color: var(--muted);
   font-size: 18px;
+}
+
+.success-phone {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f6f8f5;
+  color: var(--green-dark) !important;
+  padding: 12px 14px;
+  font-size: 17px !important;
+  font-weight: 850;
+  overflow-wrap: anywhere;
 }
 
 .success-mark {
@@ -1231,6 +1247,7 @@ h3 {
   width: 100%;
   aspect-ratio: 2084 / 754;
   object-fit: cover;
+  object-position: center;
 }
 
 .build-steps {
@@ -1324,7 +1341,7 @@ h3 {
   font-size: 14px;
 }
 
-.reviews-grid {
+.reviews-track {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
@@ -1340,6 +1357,14 @@ h3 {
   background: var(--surface);
   padding: 22px;
   box-shadow: 0 10px 26px rgba(32, 37, 35, 0.06);
+}
+
+.review-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .review-card__top {
@@ -1540,7 +1565,7 @@ details p {
   .project-grid,
   .trust-layout,
   .steps,
-  .reviews-grid {
+  .reviews-track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1657,9 +1682,28 @@ details p {
   .kit-list,
   .steps,
   .trust-grid,
-  .reviews-grid,
   .option-grid {
     grid-template-columns: 1fr;
+  }
+
+  .reviews-track {
+    display: grid;
+    grid-auto-columns: minmax(282px, 86%);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: 12px;
+    width: calc(100% + 24px);
+    margin-right: -12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 2px 12px 12px 0;
+    scroll-padding-left: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .reviews-track::-webkit-scrollbar {
+    display: none;
   }
 
   .hero__actions .button {
@@ -1769,7 +1813,12 @@ details p {
 
   .quiz-card__top {
     gap: 10px;
-    padding-right: 52px;
+    padding-right: 0;
+  }
+
+  .quiz-sheet .step-counter {
+    min-height: 48px;
+    padding-right: 58px;
   }
 
   .quiz-sheet .quiz-step {
@@ -1903,7 +1952,9 @@ details p {
   }
 
   .build-image {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 2084 / 754;
+    object-fit: contain;
+    background: #e7efe8;
   }
 
   .build-steps {
@@ -1947,6 +1998,11 @@ details p {
     min-height: auto;
     gap: 14px;
     padding: 18px;
+    scroll-snap-align: start;
+  }
+
+  .review-card__image {
+    border-radius: 6px;
   }
 
   .review-card p {

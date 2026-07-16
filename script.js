@@ -21,6 +21,7 @@ const hiddenFields = [...document.querySelectorAll("[data-hidden-field]")];
 const stepCount = document.querySelector("#step-count");
 const stepLabel = document.querySelector("#step-label");
 const progressBar = document.querySelector("[data-progress-bar]");
+const successPhone = document.querySelector("[data-success-phone]");
 
 const BASE_AREA = 56;
 const STEP_LABELS = ["Назначение", "Площадь и этажность", "Телефон"];
@@ -215,6 +216,9 @@ const showSuccess = () => {
   buildLeadMessage(data);
   leadForm.hidden = true;
   quizSuccess.hidden = false;
+  if (successPhone) {
+    successPhone.textContent = `Телефон: ${data.phone}`;
+  }
   stepCount.textContent = "3 / 3";
   stepLabel.textContent = "Заявка принята";
   progressBar.style.width = "100%";
