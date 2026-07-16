@@ -520,6 +520,8 @@ h3 {
 }
 
 .project-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -538,8 +540,9 @@ h3 {
 }
 
 .project-card__body {
-  display: grid;
-  align-content: start;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
   gap: 12px;
   padding: 22px;
 }
@@ -562,12 +565,14 @@ h3 {
 }
 
 .project-card p {
+  margin-bottom: 0;
   color: var(--muted);
 }
 
 .project-card .button {
   justify-self: start;
-  margin-top: 4px;
+  align-self: flex-start;
+  margin-top: auto;
 }
 
 .project-card dl {
@@ -616,10 +621,10 @@ h3 {
 }
 
 .kit-item {
-  min-height: 158px;
+  min-height: 174px;
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -628,23 +633,36 @@ h3 {
 }
 
 .kit-item__icon {
+  position: relative;
   display: grid;
-  width: 46px;
-  height: 46px;
+  width: 58px;
+  height: 58px;
   place-items: center;
-  border-radius: 50%;
-  background: #e7efe8;
+  border: 1px solid rgba(49, 93, 67, 0.14);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0)),
+    #e7efe8;
   color: var(--green);
+  box-shadow: inset 0 -10px 20px rgba(49, 93, 67, 0.08);
+}
+
+.kit-item:nth-child(2n) .kit-item__icon {
+  border-color: rgba(179, 92, 51, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0)),
+    #f5e9df;
+  color: var(--clay-dark);
 }
 
 .kit-item__icon svg {
-  width: 25px;
-  height: 25px;
+  width: 34px;
+  height: 34px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.8;
+  stroke-width: 1.75;
 }
 
 .kit-item h3 {
@@ -1201,17 +1219,28 @@ h3 {
   gap: 26px;
 }
 
+.build-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.07);
+}
+
 .build-image {
   width: 100%;
   aspect-ratio: 2084 / 754;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
   object-fit: cover;
-  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.07);
 }
 
 .build-steps {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 18px;
+}
+
+.build-steps li {
+  min-height: 196px;
+  background: #fbfbf8;
 }
 
 .anchor-target {
@@ -1293,6 +1322,73 @@ h3 {
 .trust-grid span {
   color: var(--muted);
   font-size: 14px;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.review-card {
+  min-height: 272px;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 22px;
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.06);
+}
+
+.review-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.review-card__top div {
+  display: grid;
+  gap: 3px;
+}
+
+.review-card__top strong {
+  color: var(--green-dark);
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.review-card__top span:not(.review-rating) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.review-rating {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #f5e9df;
+  color: var(--clay-dark);
+  padding: 6px 9px;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.review-card p {
+  margin-bottom: 0;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.review-source {
+  align-self: end;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .faq-layout {
@@ -1443,7 +1539,8 @@ details p {
 
   .project-grid,
   .trust-layout,
-  .steps {
+  .steps,
+  .reviews-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1560,6 +1657,7 @@ details p {
   .kit-list,
   .steps,
   .trust-grid,
+  .reviews-grid,
   .option-grid {
     grid-template-columns: 1fr;
   }
@@ -1611,14 +1709,20 @@ details p {
 
   .kit-item {
     min-height: auto;
-    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-columns: 48px minmax(0, 1fr);
     gap: 12px;
     padding: 16px;
   }
 
   .kit-item__icon {
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .kit-item__icon svg {
+    width: 29px;
+    height: 29px;
   }
 
   .kit-item h3 {
@@ -1794,6 +1898,61 @@ details p {
     margin-bottom: 16px;
   }
 
+  .build-card {
+    display: grid;
+  }
+
+  .build-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .build-steps {
+    gap: 0;
+    padding: 0;
+  }
+
+  .build-steps li {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 5px 12px;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--surface);
+    padding: 16px;
+  }
+
+  .build-steps span {
+    grid-row: span 2;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    margin: 0;
+    border-radius: 50%;
+    background: #f5e9df;
+    color: var(--clay-dark);
+  }
+
+  .build-steps h3 {
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .build-steps p {
+    margin-bottom: 0;
+  }
+
+  .review-card {
+    min-height: auto;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .review-card p {
+    font-size: 16px;
+  }
+
   .faq-list {
     gap: 10px;
   }
@@ -1844,6 +2003,10 @@ details p {
     grid-template-columns: 1fr;
   }
 
+  .choice-grid--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .choice-card {
     grid-template-columns: 112px minmax(0, 1fr);
     grid-template-rows: 1fr;
@@ -1868,9 +2031,9 @@ details p {
   }
 
   .choice-pill {
-    min-height: 46px;
-    padding: 9px 10px;
-    font-size: 14px;
+    min-height: 44px;
+    padding: 8px 7px;
+    font-size: 13px;
   }
 
   .media-card img {
@@ -1938,7 +2101,22 @@ details p {
   }
 
   .area-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .area-grid button {
+    min-height: 58px;
+    padding: 7px 4px;
+  }
+
+  .area-grid strong {
+    font-size: 20px;
+  }
+
+  .lead-form input,
+  .lead-form select,
+  .lead-form textarea {
+    padding: 12px 13px;
   }
 }
 
