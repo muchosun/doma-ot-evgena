@@ -155,6 +155,7 @@ const buildLeadMessage = (data, price, pricePerMeter) => {
     `Участок: ${data.plot}`,
     `Город или район: ${data.location || "не указан"}`,
     `Комплектация: ${data.finish}`,
+    "Производство: собственные СИП-панели, контроль от цеха до строительства дома",
     `Что входит в базу: ${data.features.join(", ")}`,
     `Ориентир: ${formatPrice(price)} (${formatPrice(pricePerMeter)} за м²)`,
   ];
@@ -227,7 +228,7 @@ const updateCalculator = () => {
   }
 
   summaryPurpose.textContent = `${data.purpose}, ${data.floors}, ${data.plot}`;
-  summaryFeatures.textContent = `${data.finish}, ввод коммуникаций, рабочий проект в подарок`;
+  summaryFeatures.textContent = `${data.finish}, собственные СИП-панели, ввод коммуникаций, рабочий проект в подарок`;
   summaryContact.textContent =
     phoneDigits.length >= 10
       ? `${data.contactMethod}, ${data.phone}`
