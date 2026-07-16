@@ -35,7 +35,7 @@ const progressBar = document.querySelector("[data-progress-bar]");
 const BASE_PRICE_PER_METER = 30000;
 const TURNKEY_PRICE_PER_METER = 45000;
 const BASE_AREA = 56;
-const STEP_LABELS = ["Дом", "Участок и комплект", "Телефон"];
+const STEP_LABELS = ["Дом", "Площадь и участок", "Телефон"];
 
 let currentLeadMessage = "";
 let hasSubmitted = false;
@@ -145,7 +145,7 @@ const formatPhone = (value) => {
 
 const buildLeadMessage = (data, price, pricePerMeter) => {
   const lines = [
-    "Заявка на подготовку проекта СИП-дома",
+    "Заявка на расчет СИП-дома",
     `Имя: ${data.name || "не указано"}`,
     `Телефон: ${data.phone || "не указан"}`,
     `Канал связи: ${data.contactMethod || "не указан"}, ${data.contactTime || "время не указано"}`,
@@ -155,7 +155,7 @@ const buildLeadMessage = (data, price, pricePerMeter) => {
     `Участок: ${data.plot}`,
     `Город или район: ${data.location || "не указан"}`,
     `Комплектация: ${data.finish}`,
-    "Производство: собственные СИП-панели, контроль от цеха до строительства дома",
+    "Производство: собственные СИП-панели, можно показать цех и материалы",
     `Что входит в базу: ${data.features.join(", ")}`,
     `Ориентир: ${formatPrice(price)} (${formatPrice(pricePerMeter)} за м²)`,
   ];
@@ -224,11 +224,11 @@ const updateCalculator = () => {
     calcNote.textContent =
       data.area < BASE_AREA
         ? "Компактный вариант для дачи, бани или гостевого дома."
-        : "Большая площадь требует отдельной планировки и уточнения комплектации.";
+        : "Точную планировку и комплектацию уточним перед сметой.";
   }
 
   summaryPurpose.textContent = `${data.purpose}, ${data.floors}, ${data.plot}`;
-  summaryFeatures.textContent = `${data.finish}, собственные СИП-панели, ввод коммуникаций, рабочий проект в подарок`;
+  summaryFeatures.textContent = `${data.finish}, свои СИП-панели, ввод коммуникаций, проект в подарок`;
   summaryContact.textContent =
     phoneDigits.length >= 10
       ? `${data.contactMethod}, ${data.phone}`
@@ -282,7 +282,7 @@ const setArea = (value) => {
 const copyLeadMessage = async () => {
   try {
     await navigator.clipboard.writeText(currentLeadMessage);
-    if (formStatus) formStatus.textContent = "Текст заявки скопирован. Его можно вставить в Max.";
+    if (formStatus) formStatus.textContent = "Текст заявки скопирован. Можно отправить в Max.";
   } catch {
     if (formStatus) formStatus.textContent = currentLeadMessage;
   }
@@ -384,14 +384,14 @@ leadForm.addEventListener("submit", (event) => {
 
   if (phoneDigits.length < 10) {
     phoneInput.setAttribute("aria-invalid", "true");
-    formStatus.textContent = "Добавьте корректный телефон, чтобы заявку можно было передать Евгению.";
+    formStatus.textContent = "Укажите телефон, чтобы Евгений смог связаться по расчету.";
     phoneInput.focus();
     return;
   }
 
   phoneInput.setAttribute("aria-invalid", "false");
   formStatus.textContent =
-    "Заявка сформирована. Ее можно открыть в WhatsApp или скопировать для отправки в Max.";
+    "Заявка готова: откройте WhatsApp или скопируйте текст для Max.";
   closeQuiz();
   requestSummary.scrollIntoView({ behavior: "smooth", block: "start" });
 });
