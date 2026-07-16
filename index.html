@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260717-mobile-bubble" />
+    <link rel="stylesheet" href="styles.css?v=20260717-production-proof" />
   </head>
   <body>
     <a class="skip-link" href="#top">Перейти к содержанию</a>
@@ -312,47 +312,55 @@
         </div>
       </section>
 
-      <section class="section section--muted" id="proof" aria-labelledby="proof-title">
-        <div class="container trust-layout">
-          <article class="media-card">
-            <img
-              src="assets/sip-panel-production.jpg"
-              width="1600"
-              height="1000"
-              alt="Рабочие производят СИП-панели в цехе"
-              loading="lazy"
-              decoding="async"
-            />
-            <div>
-              <span class="pill">У нас свое производство</span>
-              <h3>Проведем экскурсию по цеху</h3>
-              <p>Покажем, как производятся СИП-панели, из чего они состоят и как готовится комплект под дом.</p>
-            </div>
-          </article>
-
-          <div class="trust-copy">
+      <section class="section section--muted production-section" id="proof" aria-labelledby="proof-title">
+        <div class="container">
+          <div class="production-head">
             <p class="section-label">Производство</p>
-            <h2 id="proof-title">Свой цех помогает держать качество дома под контролем</h2>
+            <h2 id="proof-title">Проведем экскурсию по цеху и покажем, как готовится домокомплект</h2>
             <p>
-              Вы можете приехать на производство, увидеть материал до стройки,
-              задать вопросы по комплекту и заранее понять, как выбранная
-              планировка превращается в домокомплект.
+              СИП-панели производим сами. Вы можете увидеть материал до стройки,
+              обсудить комплект под вашу планировку и спокойно понять, из чего
+              будет собран будущий дом.
             </p>
-            <div class="trust-grid">
-              <div>
-                <strong>Покажем производство</strong>
-                <span>Проведем по цеху и объясним детали без технической перегрузки.</span>
+          </div>
+
+          <div class="trust-layout production-layout">
+            <article class="media-card production-media">
+              <img
+                src="assets/sip-panel-production.jpg"
+                width="1600"
+                height="1000"
+                alt="Рабочие производят СИП-панели в цехе"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="production-media__badge">Собственный цех СИП-панелей</span>
+            </article>
+
+            <div class="trust-copy production-copy">
+              <p class="section-label">Экскурсия по цеху</p>
+              <h3>Перед расчетом можно посмотреть основу будущего дома</h3>
+              <p>
+                Покажем процесс без технической перегрузки: как готовятся панели,
+                какие элементы входят в комплект и на что обратить внимание до
+                начала строительства.
+              </p>
+              <div class="trust-grid">
+                <div>
+                  <strong>Покажем производство</strong>
+                  <span>Проведем по цеху и покажем, как собирается основа домокомплекта.</span>
+                </div>
+                <div>
+                  <strong>Разберем комплект</strong>
+                  <span>Покажем, какие элементы готовятся под пол, стены и перегородки.</span>
+                </div>
+                <div>
+                  <strong>Без лишних посредников</strong>
+                  <span>Производство и стройка идут в одной связке от проекта до монтажа.</span>
+                </div>
               </div>
-              <div>
-                <strong>Разберем комплект</strong>
-                <span>Покажем, какие элементы готовятся под пол, стены и перегородки.</span>
-              </div>
-              <div>
-                <strong>Без лишних посредников</strong>
-                <span>Производство и стройка идут в одной связке от проекта до монтажа.</span>
-              </div>
+              <a class="button button--primary" href="#quiz" data-quiz-open>Обсудить домокомплект</a>
             </div>
-            <a class="button button--primary" href="#quiz" data-quiz-open>Обсудить дом</a>
           </div>
         </div>
       </section>
@@ -688,6 +696,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20260717-mobile-bubble"></script>
+    <script src="script.js?v=20260717-production-proof"></script>
   </body>
 </html>

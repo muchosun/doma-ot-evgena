@@ -1277,6 +1277,28 @@ h3 {
   align-items: center;
 }
 
+.production-head {
+  max-width: 920px;
+  margin-bottom: 28px;
+}
+
+.production-head h2 {
+  margin-bottom: 16px;
+}
+
+.production-head p:not(.section-label) {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+
+.production-layout {
+  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+  align-items: start;
+  gap: 24px;
+}
+
 .media-card {
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1289,6 +1311,32 @@ h3 {
   width: 100%;
   height: clamp(230px, 30vw, 380px);
   object-fit: cover;
+}
+
+.production-media {
+  position: relative;
+  min-height: 100%;
+}
+
+.production-media img {
+  height: clamp(300px, 34vw, 440px);
+  min-height: 0;
+}
+
+.production-media__badge {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: var(--radius);
+  background: rgba(31, 63, 45, 0.9);
+  color: var(--white);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.2;
+  backdrop-filter: blur(10px);
 }
 
 .media-card > div {
@@ -1318,10 +1366,35 @@ h3 {
   margin-bottom: 0;
 }
 
+.production-copy {
+  align-content: start;
+  border-top: 2px solid var(--green);
+  padding-top: 24px;
+}
+
+.production-copy h3 {
+  margin: 0;
+  font-size: clamp(28px, 2.5vw, 36px);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.production-copy > p:not(.section-label) {
+  margin: 0;
+}
+
+.production-copy .button {
+  justify-self: start;
+}
+
 .trust-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+}
+
+.production-copy .trust-grid {
+  grid-template-columns: 1fr;
 }
 
 .trust-grid div {
@@ -1912,8 +1985,32 @@ details p {
     gap: 22px;
   }
 
+  .production-head {
+    margin-bottom: 22px;
+  }
+
+  .production-head p:not(.section-label) {
+    font-size: 16px;
+  }
+
+  .production-layout {
+    gap: 16px;
+  }
+
   .media-card img {
     height: clamp(205px, 58vw, 280px);
+  }
+
+  .production-media img {
+    height: clamp(250px, 68vw, 320px);
+    min-height: 0;
+  }
+
+  .production-media__badge {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    padding: 11px 12px;
   }
 
   .media-card > div {
@@ -1922,6 +2019,19 @@ details p {
 
   .trust-copy {
     gap: 14px;
+  }
+
+  .production-copy {
+    padding-top: 18px;
+  }
+
+  .production-copy h3 {
+    font-size: 26px;
+    line-height: 1.08;
+  }
+
+  .production-copy .button {
+    width: 100%;
   }
 
   .trust-grid {
@@ -2190,6 +2300,10 @@ details p {
 
   .media-card img {
     height: 210px;
+  }
+
+  .production-media img {
+    height: 250px;
   }
 }
 
