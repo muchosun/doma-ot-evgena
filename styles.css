@@ -398,9 +398,9 @@ h3 {
 
 .hero__facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
-  width: min(680px, 100%);
+  width: min(760px, 100%);
   margin: 36px 0 0;
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: var(--radius);
@@ -453,6 +453,36 @@ h3 {
   font-size: 18px;
 }
 
+.intro-grid--compact {
+  align-items: center;
+}
+
+.proof-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.proof-list article {
+  min-height: 138px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 18px;
+}
+
+.proof-list strong {
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+.proof-list span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
 .intro-copy p:last-child,
 .section-head p:last-child,
 .project-card p:last-child,
@@ -471,6 +501,10 @@ h3 {
 .section-head {
   max-width: 760px;
   margin-bottom: 34px;
+}
+
+.section-head .button {
+  margin-top: 8px;
 }
 
 .section-head p:not(.section-label) {
@@ -1308,6 +1342,81 @@ body.show-mobile-cta:not(.is-quiz-visible) .mobile-quick-cta {
   color: var(--muted);
 }
 
+.trust-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.media-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.07);
+}
+
+.media-card img {
+  width: 100%;
+  height: clamp(230px, 30vw, 380px);
+  object-fit: cover;
+}
+
+.media-card > div {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+}
+
+.media-card h3,
+.media-card p {
+  margin-bottom: 0;
+}
+
+.media-card p,
+.trust-copy > p:not(.section-label) {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.trust-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.trust-copy h2 {
+  margin-bottom: 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.trust-grid div {
+  min-height: 128px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 18px;
+}
+
+.trust-grid strong {
+  color: var(--green-dark);
+  line-height: 1.15;
+}
+
+.trust-grid span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .faq-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
@@ -1444,6 +1553,7 @@ details p {
   }
 
   .project-grid,
+  .trust-layout,
   .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1528,7 +1638,7 @@ details p {
   }
 
   .hero__facts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 20px;
   }
 
@@ -1550,6 +1660,7 @@ details p {
   .intro-grid,
   .kit-layout,
   .calc-layout,
+  .trust-layout,
   .faq-layout,
   .contact-layout,
   .footer-layout {
@@ -1569,8 +1680,10 @@ details p {
   }
 
   .intro-copy,
+  .media-card p,
   .section-head p:not(.section-label),
   .contact-layout p,
+  .trust-copy > p:not(.section-label),
   .quiz-heading p {
     font-size: 16px;
   }
@@ -1580,8 +1693,10 @@ details p {
   }
 
   .project-grid,
+  .proof-list,
   .kit-list,
   .steps,
+  .trust-grid,
   .option-grid {
     grid-template-columns: 1fr;
   }
@@ -1612,6 +1727,15 @@ details p {
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .proof-list article {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .proof-list strong {
+    font-size: 20px;
   }
 
   .project-card dl {
@@ -1800,6 +1924,31 @@ details p {
     grid-template-columns: 1fr;
   }
 
+  .trust-layout {
+    gap: 22px;
+  }
+
+  .media-card img {
+    height: clamp(205px, 58vw, 280px);
+  }
+
+  .media-card > div {
+    padding: 18px;
+  }
+
+  .trust-copy {
+    gap: 14px;
+  }
+
+  .trust-grid {
+    gap: 10px;
+  }
+
+  .trust-grid div {
+    min-height: auto;
+    padding: 16px;
+  }
+
   .quiz-controls {
     grid-template-columns: 1fr;
   }
@@ -1924,6 +2073,10 @@ details p {
   .calc-result strong {
     font-size: 34px;
   }
+
+  .media-card img {
+    height: 210px;
+  }
 }
 
 @media (max-width: 900px) and (max-height: 500px) {
@@ -1951,7 +2104,7 @@ details p {
   }
 
   .hero__facts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 18px;
   }
 
