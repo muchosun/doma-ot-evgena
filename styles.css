@@ -675,6 +675,79 @@ h3 {
   color: var(--muted);
 }
 
+.price-section {
+  background:
+    linear-gradient(180deg, rgba(49, 93, 67, 0.045), rgba(251, 251, 248, 0) 58%),
+    var(--bg);
+}
+
+.price-layout {
+  display: grid;
+  gap: 24px;
+}
+
+.price-layout .section-head {
+  max-width: 760px;
+  margin-bottom: 0;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.price-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 24px;
+}
+
+.price-card--primary {
+  border-color: rgba(49, 93, 67, 0.22);
+  background: #f0f6f0;
+}
+
+.price-card span {
+  color: var(--clay-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.price-card strong {
+  color: var(--green-dark);
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.price-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.price-note p {
+  max-width: 520px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .quiz-heading p {
   max-width: 760px;
   color: var(--muted);
@@ -1785,6 +1858,7 @@ details p {
   .project-grid,
   .proof-list,
   .kit-list,
+  .price-grid,
   .steps,
   .trust-grid,
   .option-grid {
@@ -1881,6 +1955,36 @@ details p {
   .kit-item p {
     font-size: 14px;
     line-height: 1.35;
+  }
+
+  .price-layout {
+    gap: 18px;
+  }
+
+  .price-grid {
+    gap: 10px;
+  }
+
+  .price-card {
+    gap: 9px;
+    padding: 16px;
+  }
+
+  .price-card span {
+    font-size: 12px;
+  }
+
+  .price-card strong {
+    font-size: 31px;
+  }
+
+  .price-card p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .price-note {
+    display: none;
   }
 
   .section-head--sticky {
