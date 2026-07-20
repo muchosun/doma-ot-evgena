@@ -528,6 +528,13 @@ h3 {
   background: var(--surface-2);
 }
 
+.kit-section {
+  border-top: 1px solid rgba(49, 93, 67, 0.12);
+  border-bottom: 1px solid rgba(179, 92, 51, 0.22);
+  background:
+    linear-gradient(180deg, #edf3ec 0%, #f5efe7 100%);
+}
+
 .section-head {
   max-width: 760px;
   margin-bottom: 34px;
@@ -662,6 +669,12 @@ h3 {
   padding: 20px;
 }
 
+.kit-section .kit-item {
+  border-color: rgba(49, 93, 67, 0.14);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.055);
+}
+
 .kit-item__icon {
   position: relative;
   display: grid;
@@ -707,8 +720,9 @@ h3 {
 
 .price-section {
   background:
-    linear-gradient(180deg, rgba(49, 93, 67, 0.045), rgba(251, 251, 248, 0) 58%),
+    linear-gradient(180deg, rgba(179, 92, 51, 0.065), rgba(251, 251, 248, 0) 44%),
     var(--bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.72);
   border-bottom: 1px solid var(--line);
 }
 
@@ -1378,6 +1392,7 @@ h3 {
 }
 
 .build-card {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1387,19 +1402,41 @@ h3 {
 
 .build-image {
   width: 100%;
-  aspect-ratio: 2084 / 754;
+  height: clamp(430px, 42vw, 540px);
   object-fit: cover;
   object-position: center;
 }
 
 .build-steps {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 18px;
+  padding: 0;
+}
+
+.build-card::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 58%;
+  background: linear-gradient(180deg, rgba(20, 25, 21, 0), rgba(20, 25, 21, 0.56));
+  content: "";
 }
 
 .build-steps li {
-  min-height: 196px;
-  background: #fbfbf8;
+  min-height: 164px;
+  border-color: rgba(255, 255, 255, 0.58);
+  background: rgba(251, 251, 248, 0.92);
+  box-shadow: 0 14px 34px rgba(20, 25, 21, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.build-steps span {
+  margin-bottom: 26px;
 }
 
 .anchor-target {
@@ -1416,12 +1453,12 @@ h3 {
 }
 
 .production-head {
-  max-width: 920px;
-  margin-bottom: 28px;
+  max-width: 760px;
+  margin-bottom: 20px;
 }
 
 .production-head h2 {
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .production-head p:not(.section-label) {
@@ -1432,9 +1469,9 @@ h3 {
 }
 
 .production-layout {
-  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   align-items: start;
-  gap: 24px;
+  gap: 18px;
 }
 
 .media-card {
@@ -1453,11 +1490,11 @@ h3 {
 
 .production-media {
   position: relative;
-  min-height: 100%;
+  min-height: 0;
 }
 
 .production-media img {
-  height: clamp(300px, 34vw, 440px);
+  height: clamp(280px, 28vw, 360px);
   min-height: 0;
 }
 
@@ -1506,13 +1543,18 @@ h3 {
 
 .production-copy {
   align-content: start;
-  border-top: 2px solid var(--green);
-  padding-top: 24px;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--green);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 22px;
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.06);
 }
 
 .production-copy h3 {
   margin: 0;
-  font-size: clamp(28px, 2.5vw, 36px);
+  font-size: clamp(24px, 2vw, 30px);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -1532,7 +1574,18 @@ h3 {
 }
 
 .production-copy .trust-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.production-copy .trust-grid div {
+  min-height: auto;
+  padding: 14px;
+}
+
+.production-copy .trust-grid span {
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 .trust-grid div {
@@ -2255,7 +2308,13 @@ details p {
   }
 
   .production-copy {
-    padding-top: 18px;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 18px 0 0;
+    box-shadow: none;
   }
 
   .production-copy h3 {
@@ -2269,6 +2328,14 @@ details p {
 
   .trust-grid {
     gap: 10px;
+  }
+
+  .production-copy .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .production-copy .trust-grid span {
+    font-size: 14px;
   }
 
   .trust-grid div {
@@ -2297,13 +2364,20 @@ details p {
     display: grid;
   }
 
+  .build-card::after {
+    display: none;
+  }
+
   .build-image {
+    height: auto;
     aspect-ratio: 2084 / 754;
     object-fit: contain;
     background: #e7efe8;
   }
 
   .build-steps {
+    position: static;
+    z-index: auto;
     gap: 0;
     padding: 0;
   }
@@ -2317,6 +2391,8 @@ details p {
     border-radius: 0;
     background: var(--surface);
     padding: 16px;
+    box-shadow: none;
+    backdrop-filter: none;
   }
 
   .build-steps span {
