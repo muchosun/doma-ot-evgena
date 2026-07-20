@@ -17,7 +17,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260721-contacts-lite" />
+    <link rel="stylesheet" href="styles.css?v=20260721-final-tune" />
   </head>
   <body>
     <!-- Yandex.Metrika counter -->
@@ -60,9 +60,23 @@
         <span></span>
         <span></span>
       </button>
-      <a class="header-action" href="#quiz" data-quiz-open>
-        Заказать расчет
-      </a>
+      <div class="header-actions">
+        <a
+          class="header-phone"
+          href="tel:+79182781144"
+          aria-label="Позвонить по номеру +7 918 278-11-44"
+          data-call-link
+          data-contact-action="header_call"
+        >
+          <span class="header-phone__text">+7 918 278-11-44</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.7 3.8 8.8 8c.2.5.1 1.1-.3 1.5l-1 1c1.1 2.3 2.8 4 5.1 5.1l1-1c.4-.4 1-.5 1.5-.3l4.2 2.1c.5.2.8.7.8 1.2v2.1c0 .8-.6 1.4-1.4 1.4C10 21.1 2.9 14 2.9 5.3c0-.8.6-1.4 1.4-1.4h2.4Z" />
+          </svg>
+        </a>
+        <a class="header-action" href="#quiz" data-quiz-open>
+          Заказать расчет
+        </a>
+      </div>
     </header>
 
     <main id="top">
@@ -283,11 +297,7 @@
         <div class="container price-layout">
           <div class="section-head">
             <p class="section-label">Стоимость</p>
-            <h2 id="price-title">Понятный ориентир перед консультацией</h2>
-            <p>
-              База — 30 000 ₽/м². Финальный расчет зависит от планировки,
-              отделки, окон и дополнительных работ.
-            </p>
+            <h2 id="price-title">Сразу показываем порядок цен</h2>
           </div>
 
           <div class="price-grid" aria-label="Ориентиры по стоимости">
@@ -295,9 +305,8 @@
               <span>Базовая комплектация</span>
               <strong>30 000 ₽/м²</strong>
               <p>
-                Входит: свайный фундамент, обвязка, пол, стены, перекрытия
-                и перегородки из СИП-панелей, кровля из металлопрофиля,
-                стандартные окна, входная дверь и ввод коммуникаций.
+                Фундамент, обвязка, СИП-панели для пола, стен, перекрытий
+                и перегородок, кровля, стандартные окна, дверь и ввод коммуникаций.
               </p>
             </article>
 
@@ -305,14 +314,14 @@
               <span>Строительство под ключ</span>
               <strong>от 45 000 ₽/м²</strong>
               <p>
-                Отделка, нестандартные окна, внешние и внутренние работы
-                считаются после консультации под ваши пожелания.
+                Добавляем отделку и дополнительные работы после консультации
+                по вашему дому.
               </p>
             </article>
           </div>
 
           <div class="price-note">
-            <p>Точный расчет зависит от проекта и выбранных работ.</p>
+            <p>Оставьте телефон, и мы посчитаем ваш вариант под проект и участок.</p>
             <a class="button button--primary" href="#quiz" data-quiz-open>Получить расчет по моему дому</a>
           </div>
         </div>
@@ -323,10 +332,6 @@
           <div class="section-head">
             <p class="section-label">Стройка</p>
             <h2 id="build-title">Как проходит строительство</h2>
-            <p>
-              Сначала фиксируем проект и комплектацию, затем готовим основание,
-              собираем домокомплект и закрываем теплый контур.
-            </p>
           </div>
           <article class="build-card">
             <img
@@ -368,12 +373,7 @@
         <div class="container">
           <div class="production-head">
             <p class="section-label">Производство</p>
-            <h2 id="proof-title">Проведем экскурсию по цеху и покажем, как готовится домокомплект</h2>
-            <p>
-              СИП-панели производим сами. Вы можете увидеть материал до стройки,
-              обсудить комплект под вашу планировку и спокойно понять, из чего
-              будет собран будущий дом.
-            </p>
+            <h2 id="proof-title">Проведем экскурсию по цеху</h2>
           </div>
 
           <div class="trust-layout production-layout">
@@ -390,13 +390,8 @@
             </article>
 
             <div class="trust-copy production-copy">
-              <p class="section-label">Экскурсия по цеху</p>
-              <h3>Перед расчетом можно посмотреть основу будущего дома</h3>
-              <p>
-                Покажем процесс без технической перегрузки: как готовятся панели,
-                какие элементы входят в комплект и на что обратить внимание до
-                начала строительства.
-              </p>
+              <p class="section-label">Собственный цех</p>
+              <h3>Покажем производство и разберем домокомплект</h3>
               <div class="trust-grid">
                 <div>
                   <strong>Покажем производство</strong>
@@ -505,14 +500,14 @@
                 </div>
                 <span class="review-rating">5 из 5</span>
               </div>
-              <p>К строительству приступили сразу, сделали качественно и в срок. Отмечает разумные сроки и результат.</p>
+              <p>К строительству приступили сразу, сделали качественно и в срок. Уложились в сроки и показали хороший результат.</p>
               <span class="review-source">Авито · сделка состоялась</span>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="faq" aria-labelledby="faq-title">
+      <section class="section faq-section" id="faq" aria-labelledby="faq-title">
         <div class="container faq-layout">
           <div class="section-head">
             <p class="section-label">FAQ</p>
@@ -778,6 +773,6 @@
     <script>
       window.SIP_LEAD_ENDPOINT = "https://functions.yandexcloud.net/d4epp8bq7877smmmg32v";
     </script>
-    <script src="script.js?v=20260721-contacts-lite"></script>
+    <script src="script.js?v=20260721-final-tune"></script>
   </body>
 </html>

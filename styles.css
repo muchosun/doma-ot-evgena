@@ -190,6 +190,7 @@ summary:focus-visible {
 }
 
 .main-nav a,
+.header-phone,
 .header-action,
 .nav-toggle {
   min-height: 40px;
@@ -205,20 +206,45 @@ summary:focus-visible {
 }
 
 .main-nav a:hover,
+.header-phone:hover,
 .header-action:hover,
 .nav-toggle:hover {
   background: rgba(255, 255, 255, 0.14);
 }
 
 .site-header.is-scrolled .main-nav a:hover,
+.site-header.is-scrolled .header-phone:hover,
 .site-header.is-scrolled .header-action:hover,
 .site-header.is-scrolled .nav-toggle:hover {
   background: var(--surface-2);
 }
 
-.header-action {
+.header-actions {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-phone,
+.header-action {
   border: 1px solid currentColor;
+}
+
+.header-phone {
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.header-phone svg {
+  display: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 .nav-toggle {
@@ -1601,6 +1627,13 @@ h3 {
   align-items: start;
 }
 
+.faq-section {
+  border-top: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(49, 93, 67, 0.045), rgba(251, 251, 248, 0) 46%),
+    var(--bg);
+}
+
 .faq-list {
   display: grid;
   gap: 12px;
@@ -1767,6 +1800,7 @@ details p {
 
   .site-header {
     min-height: 66px;
+    gap: 8px;
     padding: 10px 14px;
   }
 
@@ -1777,6 +1811,24 @@ details p {
   .brand__mark {
     width: 40px;
     height: 40px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .header-phone {
+    width: 40px;
+    min-height: 38px;
+    padding: 0;
+  }
+
+  .header-phone__text {
+    display: none;
+  }
+
+  .header-phone svg {
+    display: block;
   }
 
   .header-action {
@@ -2421,6 +2473,10 @@ details p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .header-action {
+    display: none;
   }
 
   .choice-grid--media {

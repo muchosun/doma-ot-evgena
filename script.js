@@ -240,7 +240,7 @@ const resetQuiz = () => {
 
 const openQuiz = (trigger = null) => {
   lastQuizTrigger = trigger;
-  if (leadForm.hidden) resetQuiz();
+  resetQuiz();
   quizModal.classList.add("is-open");
   quizModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("is-quiz-open");
