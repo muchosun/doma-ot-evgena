@@ -674,6 +674,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
+  height: 100%;
   padding: 16px;
 }
 
@@ -717,6 +718,9 @@ h3 {
 }
 
 .kit-item h3 {
+  min-height: 2.3em;
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 5px;
   font-size: 17px;
   line-height: 1.15;
@@ -730,7 +734,14 @@ h3 {
 }
 
 .kit-action {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--white);
   justify-self: start;
+}
+
+.kit-action:hover {
+  background: var(--green-dark);
 }
 
 .price-section {
@@ -1416,6 +1427,7 @@ h3 {
 }
 
 .build-image {
+  display: none;
   width: 100%;
   height: auto;
   aspect-ratio: 2084 / 754;
@@ -1434,13 +1446,15 @@ h3 {
 }
 
 .build-steps li {
-  min-height: 154px;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  overflow: hidden;
   border: 0;
-  border-top: 1px solid var(--line);
   border-right: 1px solid var(--line);
   border-radius: 0;
   background: var(--surface);
-  padding: 18px;
+  padding: 0;
   box-shadow: none;
   backdrop-filter: none;
 }
@@ -1450,7 +1464,31 @@ h3 {
 }
 
 .build-steps span {
-  margin-bottom: 18px;
+  margin: 18px 18px 18px;
+}
+
+.build-step__image {
+  width: 100%;
+  height: clamp(250px, 24vw, 340px);
+  border-bottom: 1px solid var(--line);
+  object-fit: cover;
+  object-position: center;
+}
+
+.build-steps h3 {
+  min-height: 2.4em;
+  margin: 0;
+  padding: 0 18px;
+  font-size: 21px;
+}
+
+.build-steps p {
+  margin: 0;
+  padding: 8px 18px 20px;
+}
+
+.build-action {
+  justify-self: start;
 }
 
 .anchor-target {
@@ -2008,6 +2046,10 @@ details p {
     width: 100%;
   }
 
+  .kit-item h3 {
+    min-height: 0;
+  }
+
   .faq-layout {
     gap: 14px;
   }
@@ -2399,6 +2441,7 @@ details p {
   }
 
   .build-image {
+    display: block;
     height: auto;
     aspect-ratio: 2084 / 754;
     object-fit: contain;
@@ -2425,6 +2468,10 @@ details p {
     backdrop-filter: none;
   }
 
+  .build-step__image {
+    display: none;
+  }
+
   .build-steps span {
     grid-row: span 2;
     display: grid;
@@ -2438,12 +2485,19 @@ details p {
   }
 
   .build-steps h3 {
+    min-height: 0;
     margin-bottom: 0;
+    padding: 0;
     font-size: 18px;
   }
 
   .build-steps p {
     margin-bottom: 0;
+    padding: 0;
+  }
+
+  .build-action {
+    width: 100%;
   }
 
   .review-card {

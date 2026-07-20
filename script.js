@@ -23,6 +23,8 @@ const stepLabel = document.querySelector("#step-label");
 const progressBar = document.querySelector("[data-progress-bar]");
 const successPhone = document.querySelector("[data-success-phone]");
 const mobileActionBubble = document.querySelector("[data-mobile-action-bubble]");
+const contactSection = document.querySelector("#contacts");
+const siteFooter = document.querySelector(".site-footer");
 const callbackCountdown = document.querySelector("[data-callback-countdown]");
 const leadSubmitButton = leadForm?.querySelector('button[type="submit"]');
 const contactActionLinks = [...document.querySelectorAll("[data-contact-action]")];
@@ -48,10 +50,17 @@ const updateHeader = () => {
 const updateMobileActionBubble = () => {
   if (!mobileActionBubble) return;
 
+  const isContactZoneVisible = [contactSection, siteFooter].some((section) => {
+    if (!section) return false;
+    const rect = section.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.84 && rect.bottom > 0;
+  });
+
   const shouldShow =
     mobileBubbleMedia.matches &&
     window.scrollY > window.innerHeight * 0.82 &&
-    !quizModal.classList.contains("is-open");
+    !quizModal.classList.contains("is-open") &&
+    !isContactZoneVisible;
 
   mobileActionBubble.classList.toggle("is-visible", shouldShow);
 };
