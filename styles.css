@@ -1672,6 +1672,13 @@ details p {
   padding: 0 14px;
 }
 
+.contact-actions--buttons .contact-note {
+  grid-column: 1 / -1;
+  padding-top: 4px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
 .site-footer {
   padding: 28px 0;
   background: #171b19;

@@ -25,6 +25,7 @@ const successPhone = document.querySelector("[data-success-phone]");
 const mobileActionBubble = document.querySelector("[data-mobile-action-bubble]");
 const callbackCountdown = document.querySelector("[data-callback-countdown]");
 const leadSubmitButton = leadForm?.querySelector('button[type="submit"]');
+const contactActionLinks = [...document.querySelectorAll("[data-contact-action]")];
 
 const BASE_AREA = 56;
 const CALLBACK_TIMER_SECONDS = 120;
@@ -347,6 +348,13 @@ navToggle.addEventListener("click", () => {
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => setMenuOpen(false));
+});
+
+contactActionLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const action = link.dataset.contactAction;
+    if (action) window.ym?.(110882448, "reachGoal", `contact_${action}_click`);
+  });
 });
 
 quizOpenButtons.forEach((button) => {
