@@ -120,7 +120,7 @@ summary:focus-visible {
   left: 0;
   right: 0;
   display: grid;
-  grid-template-columns: minmax(190px, 0.8fr) auto minmax(320px, 1fr);
+  grid-template-columns: minmax(190px, 0.8fr) auto minmax(170px, 1fr);
   align-items: center;
   gap: 20px;
   min-height: 72px;
@@ -662,14 +662,15 @@ h3 {
 .kit-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 12px;
 }
 
 .kit-item {
-  min-height: 126px;
+  min-height: 148px;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 14px;
   align-items: start;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -687,8 +688,8 @@ h3 {
 .kit-item__icon {
   position: relative;
   display: grid;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   place-items: center;
   border: 1px solid rgba(49, 93, 67, 0.14);
   border-radius: 14px;
@@ -708,8 +709,8 @@ h3 {
 }
 
 .kit-item__icon svg {
-  width: 29px;
-  height: 29px;
+  width: 26px;
+  height: 26px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -1420,10 +1421,10 @@ h3 {
 .build-card {
   display: grid;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.07);
+  background: transparent;
+  box-shadow: none;
 }
 
 .build-image {
@@ -1438,6 +1439,7 @@ h3 {
 
 .build-steps {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
   padding: 0;
 }
 
@@ -1450,17 +1452,16 @@ h3 {
   display: grid;
   grid-template-rows: auto auto auto 1fr;
   overflow: hidden;
-  border: 0;
-  border-right: 1px solid var(--line);
-  border-radius: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: var(--surface);
   padding: 0;
-  box-shadow: none;
+  box-shadow: 0 10px 26px rgba(32, 37, 35, 0.055);
   backdrop-filter: none;
 }
 
 .build-steps li:last-child {
-  border-right: 0;
+  border-right: 1px solid var(--line);
 }
 
 .build-steps span {
@@ -1469,7 +1470,8 @@ h3 {
 
 .build-step__image {
   width: 100%;
-  height: clamp(250px, 24vw, 340px);
+  aspect-ratio: 4 / 3;
+  height: auto;
   border-bottom: 1px solid var(--line);
   object-fit: cover;
   object-position: center;
@@ -1522,7 +1524,7 @@ h3 {
 
 .production-layout {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  align-items: start;
+  align-items: center;
   gap: 18px;
 }
 
@@ -1641,6 +1643,7 @@ h3 {
 }
 
 .trust-grid div {
+  min-width: 0;
   min-height: 128px;
   display: grid;
   align-content: start;
@@ -1654,11 +1657,13 @@ h3 {
 .trust-grid strong {
   color: var(--green-dark);
   line-height: 1.15;
+  overflow-wrap: break-word;
 }
 
 .trust-grid span {
   color: var(--muted);
   font-size: 14px;
+  overflow-wrap: break-word;
 }
 
 .reviews-track {
@@ -1905,6 +1910,30 @@ details p {
   .steps,
   .reviews-track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .production-layout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .production-media img {
+    height: clamp(310px, 36vw, 380px);
+  }
+
+  .production-copy .trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .build-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .build-steps li,
+  .build-steps li:last-child {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
   }
 }
 
@@ -2434,6 +2463,11 @@ details p {
 
   .build-card {
     display: grid;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 10px 26px rgba(32, 37, 35, 0.07);
   }
 
   .build-card::after {
