@@ -24,11 +24,13 @@ const progressBar = document.querySelector("[data-progress-bar]");
 const successPhone = document.querySelector("[data-success-phone]");
 const mobileActionBubble = document.querySelector("[data-mobile-action-bubble]");
 const callbackCountdown = document.querySelector("[data-callback-countdown]");
+const leadSubmitButton = leadForm?.querySelector('button[type="submit"]');
 
 const BASE_AREA = 56;
 const CALLBACK_TIMER_SECONDS = 120;
 const STEP_LABELS = ["Назначение", "Площадь и этажность", "Телефон"];
 const mobileBubbleMedia = window.matchMedia("(max-width: 760px)");
+const leadEndpoint = typeof window.SIP_LEAD_ENDPOINT === "string" ? window.SIP_LEAD_ENDPOINT.trim() : "";
 
 let currentStep = 0;
 let maxStep = 0;
@@ -154,6 +156,28 @@ const buildLeadMessage = (data) =>
     "Производство: СИП-панели из собственного цеха",
   ].join("\n");
 
+const createLeadPayload = () => ({
+  ...getFormData(),
+  source: window.location.href,
+  submittedAt: new Date().toISOString(),
+});
+
+const sendLeadToMax = async (payload) => {
+  if (!leadEndpoint) throw new Error("Lead endpoint is not configured");
+
+  const response = await fetch(leadEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) throw new Error(`Lead endpoint responded with ${response.status}`);
+  return { status: "sent" };
+};
+
+const waitFor = (milliseconds) =>
+  new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+
 const syncChoices = () => {
   const data = getFormData();
   const formData = new FormData(leadForm);
@@ -185,7 +209,7 @@ const syncChoices = () => {
     planSummary.textContent = `Выбрано: ${data.area} м², ${data.floors || "этажность уточним"}.`;
   }
 
-  if (!hasSubmitted || getPhoneDigits(data.phone).length >= 10) {
+  if (!hasSubmitted || getPhoneDigits(data.phone).length >= 11) {
     phoneInput.setAttribute("aria-invalid", "false");
   }
 
@@ -203,6 +227,10 @@ const resetQuiz = () => {
   phoneInput.setAttribute("aria-invalid", "false");
   leadForm.hidden = false;
   quizSuccess.hidden = true;
+  if (leadSubmitButton) {
+    leadSubmitButton.disabled = false;
+    leadSubmitButton.textContent = "Оставить заявку";
+  }
   formStatus.textContent = "";
   resetCallbackTimer();
   setStep(0, false);
@@ -293,6 +321,10 @@ const showSuccess = () => {
   if (successPhone) {
     successPhone.textContent = `Телефон: ${data.phone}`;
   }
+  if (leadSubmitButton) {
+    leadSubmitButton.disabled = false;
+    leadSubmitButton.textContent = "Оставить заявку";
+  }
   stepCount.textContent = "3 / 3";
   stepLabel.textContent = "Заявка принята";
   progressBar.style.width = "100%";
@@ -380,21 +412,40 @@ phoneInput.addEventListener("input", () => {
   syncChoices();
 });
 
-leadForm.addEventListener("submit", (event) => {
+leadForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   hasSubmitted = true;
   const data = syncChoices();
 
-  if (getPhoneDigits(data.phone).length < 10) {
+  if (getPhoneDigits(data.phone).length < 11) {
     phoneInput.setAttribute("aria-invalid", "true");
-    formStatus.textContent = "Укажите телефон, чтобы специалист смог связаться с вами.";
+    formStatus.textContent = "Укажите полный телефон, чтобы специалист смог связаться с вами.";
     phoneInput.focus();
     return;
   }
 
   phoneInput.setAttribute("aria-invalid", "false");
-  formStatus.textContent = "Формируем заявку...";
-  setTimeout(showSuccess, 650);
+  formStatus.textContent = "Отправляем заявку...";
+  if (leadSubmitButton) {
+    leadSubmitButton.disabled = true;
+    leadSubmitButton.textContent = "Отправляем...";
+  }
+
+  try {
+    await Promise.all([
+      sendLeadToMax(createLeadPayload()),
+      waitFor(650),
+    ]);
+    window.ym?.(110882448, "reachGoal", "quiz_lead_submit");
+    showSuccess();
+  } catch {
+    formStatus.textContent = "Не удалось отправить заявку. Проверьте номер и попробуйте ещё раз.";
+    window.ym?.(110882448, "reachGoal", "quiz_lead_error");
+    if (leadSubmitButton) {
+      leadSubmitButton.disabled = false;
+      leadSubmitButton.textContent = "Оставить заявку";
+    }
+  }
 });
 
 updateHeader();

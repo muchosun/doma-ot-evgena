@@ -1,2 +1,7 @@
 .DS_Store
 Thumbs.db
+.env
+.env.*
+!.env.example
+!lead-gateway/.env.example
+lead-gateway/*.zip

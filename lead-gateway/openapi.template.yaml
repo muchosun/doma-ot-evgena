@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: SIP PRO lead gateway
+  version: 1.0.0
+x-yc-apigateway:
+  ignoreTrailingSlashes: true
+paths:
+  /health:
+    get:
+      operationId: health
+      responses:
+        "200":
+          description: Function health status
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <FUNCTION_ID>
+        service_account_id: <SERVICE_ACCOUNT_ID>
+        payload_format_version: "1.0"
+  /v1/leads:
+    # Basic circuit breaker for accidental request storms. SmartCaptcha is still
+    # required before enabling paid traffic because a rate limit is not a bot filter.
+    x-yc-apigateway-rate-limit:
+      allRequests:
+        rpm: 60
+    options:
+      operationId: leadCors
+      responses:
+        "204":
+          description: CORS preflight
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <FUNCTION_ID>
+        service_account_id: <SERVICE_ACCOUNT_ID>
+        payload_format_version: "1.0"
+    post:
+      operationId: createLead
+      responses:
+        "201":
+          description: Lead accepted
+        "400":
+          description: Invalid lead
+        "403":
+          description: Invalid origin
+        "502":
+          description: MAX delivery failed
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <FUNCTION_ID>
+        service_account_id: <SERVICE_ACCOUNT_ID>
+        payload_format_version: "1.0"
