@@ -333,6 +333,10 @@ h1 {
   letter-spacing: 0;
 }
 
+.hero h1 span {
+  display: block;
+}
+
 h2 {
   margin-bottom: 18px;
   font-size: 50px;
@@ -705,6 +709,7 @@ h3 {
   background:
     linear-gradient(180deg, rgba(49, 93, 67, 0.045), rgba(251, 251, 248, 0) 58%),
     var(--bg);
+  border-bottom: 1px solid var(--line);
 }
 
 .price-layout {
@@ -1366,6 +1371,12 @@ h3 {
   gap: 26px;
 }
 
+.build-section {
+  background:
+    linear-gradient(180deg, rgba(179, 92, 51, 0.06), rgba(251, 251, 248, 0) 40%),
+    var(--surface);
+}
+
 .build-card {
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1623,7 +1634,7 @@ h3 {
 .faq-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-  gap: 42px;
+  gap: 28px;
   align-items: start;
 }
 
@@ -1731,7 +1742,7 @@ details p {
 
 @media (max-width: 1040px) {
   .site-header {
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
   }
 
   .main-nav {
@@ -1912,6 +1923,14 @@ details p {
 
   .section-head {
     margin-bottom: 22px;
+  }
+
+  .faq-layout {
+    gap: 14px;
+  }
+
+  .faq-layout .section-head {
+    margin-bottom: 0;
   }
 
   .project-grid,
@@ -2365,6 +2384,10 @@ details p {
     padding: 18px;
   }
 
+  .contact-actions--buttons .contact-note {
+    display: none;
+  }
+
   .mobile-action-bubble {
     position: fixed;
     z-index: 60;
@@ -2476,7 +2499,12 @@ details p {
   }
 
   .header-action {
-    display: none;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .header-actions {
+    gap: 5px;
   }
 
   .choice-grid--media {
