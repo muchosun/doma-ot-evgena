@@ -120,7 +120,7 @@ summary:focus-visible {
   left: 0;
   right: 0;
   display: grid;
-  grid-template-columns: minmax(210px, 1fr) auto minmax(170px, 1fr);
+  grid-template-columns: minmax(190px, 0.8fr) auto minmax(320px, 1fr);
   align-items: center;
   gap: 20px;
   min-height: 72px;
@@ -224,6 +224,10 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.header-action__short {
+  display: none;
 }
 
 .header-phone,
@@ -641,8 +645,8 @@ h3 {
 
 .kit-layout {
   display: grid;
-  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-  gap: 34px;
+  grid-template-columns: 1fr;
+  gap: 22px;
   align-items: start;
 }
 
@@ -651,22 +655,26 @@ h3 {
   top: 104px;
 }
 
+.kit-section .section-head--sticky {
+  position: static;
+}
+
 .kit-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .kit-item {
-  min-height: 150px;
+  min-height: 126px;
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
   align-items: start;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
-  padding: 20px;
+  padding: 16px;
 }
 
 .kit-section .kit-item {
@@ -678,11 +686,11 @@ h3 {
 .kit-item__icon {
   position: relative;
   display: grid;
-  width: 58px;
-  height: 58px;
+  width: 48px;
+  height: 48px;
   place-items: center;
   border: 1px solid rgba(49, 93, 67, 0.14);
-  border-radius: 16px;
+  border-radius: 14px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0)),
     #e7efe8;
@@ -699,8 +707,8 @@ h3 {
 }
 
 .kit-item__icon svg {
-  width: 34px;
-  height: 34px;
+  width: 29px;
+  height: 29px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -709,13 +717,20 @@ h3 {
 }
 
 .kit-item h3 {
-  margin-bottom: 7px;
-  font-size: 19px;
+  margin-bottom: 5px;
+  font-size: 17px;
+  line-height: 1.15;
 }
 
 .kit-item p {
   margin-bottom: 0;
   color: var(--muted);
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+.kit-action {
+  justify-self: start;
 }
 
 .price-section {
@@ -1392,7 +1407,7 @@ h3 {
 }
 
 .build-card {
-  position: relative;
+  display: grid;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1402,41 +1417,40 @@ h3 {
 
 .build-image {
   width: 100%;
-  height: clamp(430px, 42vw, 540px);
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 2084 / 754;
+  background: #e7efe8;
+  object-fit: contain;
   object-position: center;
 }
 
 .build-steps {
-  position: absolute;
-  z-index: 1;
-  right: 18px;
-  bottom: 18px;
-  left: 18px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 0;
 }
 
 .build-card::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 58%;
-  background: linear-gradient(180deg, rgba(20, 25, 21, 0), rgba(20, 25, 21, 0.56));
-  content: "";
+  display: none;
 }
 
 .build-steps li {
-  min-height: 164px;
-  border-color: rgba(255, 255, 255, 0.58);
-  background: rgba(251, 251, 248, 0.92);
-  box-shadow: 0 14px 34px rgba(20, 25, 21, 0.18);
-  backdrop-filter: blur(12px);
+  min-height: 154px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  padding: 18px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.build-steps li:last-child {
+  border-right: 0;
 }
 
 .build-steps span {
-  margin-bottom: 26px;
+  margin-bottom: 18px;
 }
 
 .anchor-target {
@@ -1769,6 +1783,10 @@ details p {
   padding: 0 14px;
 }
 
+.contact-calc {
+  grid-column: 1 / -1;
+}
+
 .contact-actions--buttons .contact-note {
   grid-column: 1 / -1;
   padding-top: 4px;
@@ -1895,6 +1913,14 @@ details p {
     display: block;
   }
 
+  .header-action__full {
+    display: none;
+  }
+
+  .header-action__short {
+    display: inline;
+  }
+
   .header-action {
     min-height: 38px;
     padding: 0 12px;
@@ -1976,6 +2002,10 @@ details p {
 
   .section-head {
     margin-bottom: 22px;
+  }
+
+  .kit-action {
+    width: 100%;
   }
 
   .faq-layout {
