@@ -16,8 +16,29 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/hero-sip-house.jpg" />
+    <link rel="canonical" href="https://sipdom-krd.ru/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260721-layout-1024" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/hero-sip-house-900.webp"
+      imagesrcset="assets/hero-sip-house-900.webp 900w, assets/hero-sip-house-1600.webp 1600w"
+      imagesizes="100vw"
+      type="image/webp"
+    />
+    <link rel="stylesheet" href="styles.min.css?v=20260721-cover-seo" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HomeAndConstructionBusiness",
+        "name": "СИП ПРО",
+        "url": "https://sipdom-krd.ru/",
+        "telephone": "+79182781144",
+        "description": "Строительство домов из СИП-панелей в Краснодаре и Краснодарском крае. Собственное производство СИП-панелей, комплектация и строительство под ключ.",
+        "areaServed": "Краснодар и Краснодарский край",
+        "knowsAbout": ["СИП-панели", "СИП-дома", "домокомплекты", "строительство домов"]
+      }
+    </script>
   </head>
   <body>
     <!-- Yandex.Metrika counter -->
@@ -81,6 +102,8 @@
         <img
           class="hero__image"
           src="assets/hero-sip-house.jpg"
+          srcset="assets/hero-sip-house-900.webp 900w, assets/hero-sip-house-1600.webp 1600w"
+          sizes="100vw"
           width="1823"
           height="863"
           alt="Современный одноэтажный дом с террасой"
@@ -148,6 +171,8 @@
             <article class="project-card project-card--featured">
               <img
                 src="assets/project-56.jpg"
+                srcset="assets/project-56-640.webp 640w, assets/project-56-960.webp 960w"
+                sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1040px) calc((100vw - 56px) / 2), 450px"
                 width="1536"
                 height="1024"
                 alt="Одноэтажный СИП-дом с крыльцом"
@@ -167,6 +192,8 @@
             <article class="project-card">
               <img
                 src="assets/project-family.jpg"
+                srcset="assets/project-family-640.webp 640w, assets/project-family-960.webp 960w"
+                sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1040px) calc((100vw - 56px) / 2), 360px"
                 width="1536"
                 height="1024"
                 alt="СИП-дом с мансардой для семьи"
@@ -183,6 +210,8 @@
             <article class="project-card">
               <img
                 src="assets/project-bath.jpg"
+                srcset="assets/project-bath-640.webp 640w, assets/project-bath-960.webp 960w"
+                sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1040px) calc((100vw - 56px) / 2), 360px"
                 width="1536"
                 height="1024"
                 alt="Компактный гостевой дом на участке"
@@ -321,8 +350,8 @@
           </div>
 
           <div class="price-note">
-            <p>Оставьте телефон, и мы посчитаем ваш вариант под проект и участок.</p>
-            <a class="button button--primary" href="#quiz" data-quiz-open>Получить расчет по моему дому</a>
+            <p>Оставьте телефон — посчитаем дом под ваш участок и выбранную комплектацию.</p>
+            <a class="button button--primary" href="#quiz" data-quiz-open>Получить расчет за минуту</a>
           </div>
         </div>
       </section>
@@ -337,6 +366,8 @@
             <img
               class="build-image"
               src="assets/construction-stages.jpg"
+              srcset="assets/construction-stages-900.webp 900w"
+              sizes="(max-width: 760px) calc(100vw - 24px), 900px"
               width="2084"
               height="754"
               alt="Этапы строительства СИП-дома: проект, фундамент, сборка панелей и готовый дом"
@@ -347,7 +378,9 @@
               <li>
                 <img
                   class="build-step__image"
-                  src="assets/construction-stage-project.jpg"
+                  src="assets/construction-stage-project.jpg?v=20260721-cover-seo"
+                  srcset="assets/construction-stage-project.webp 521w"
+                  sizes="(max-width: 1040px) calc((100vw - 54px) / 2), 285px"
                   width="521"
                   height="754"
                   alt="Проект и подготовка участка перед строительством"
@@ -361,7 +394,9 @@
               <li>
                 <img
                   class="build-step__image"
-                  src="assets/construction-stage-foundation.jpg"
+                  src="assets/construction-stage-foundation.jpg?v=20260721-cover-seo"
+                  srcset="assets/construction-stage-foundation.webp 521w"
+                  sizes="(max-width: 1040px) calc((100vw - 54px) / 2), 285px"
                   width="521"
                   height="754"
                   alt="Фундамент и обвязка для СИП-дома"
@@ -375,7 +410,9 @@
               <li>
                 <img
                   class="build-step__image"
-                  src="assets/construction-stage-assembly.jpg"
+                  src="assets/construction-stage-assembly.jpg?v=20260721-cover-seo"
+                  srcset="assets/construction-stage-assembly.webp 521w"
+                  sizes="(max-width: 1040px) calc((100vw - 54px) / 2), 285px"
                   width="521"
                   height="754"
                   alt="Сборка стен и теплого контура дома"
@@ -389,7 +426,9 @@
               <li>
                 <img
                   class="build-step__image"
-                  src="assets/construction-stage-ready.jpg"
+                  src="assets/construction-stage-ready.jpg?v=20260721-cover-seo"
+                  srcset="assets/construction-stage-ready.webp 521w"
+                  sizes="(max-width: 1040px) calc((100vw - 54px) / 2), 285px"
                   width="521"
                   height="754"
                   alt="Готовый СИП-дом с кровлей и входной зоной"
@@ -417,6 +456,8 @@
             <article class="media-card production-media">
               <img
                 src="assets/sip-panel-production.jpg"
+                srcset="assets/sip-panel-production-900.webp 900w"
+                sizes="(max-width: 1040px) calc(100vw - 40px), 552px"
                 width="1600"
                 height="1000"
                 alt="Рабочие производят СИП-панели в цехе"
@@ -461,6 +502,8 @@
               <img
                 class="review-card__image"
                 src="assets/review-tatyana.jpg"
+                srcset="assets/review-tatyana-640.webp 640w"
+                sizes="(max-width: 760px) 86vw, (max-width: 1040px) calc((100vw - 56px) / 2), 280px"
                 width="1000"
                 height="750"
                 alt="Готовый дом из СИП-панелей"
@@ -482,6 +525,8 @@
               <img
                 class="review-card__image"
                 src="assets/review-alexey.jpg"
+                srcset="assets/review-alexey-640.webp 640w"
+                sizes="(max-width: 760px) 86vw, (max-width: 1040px) calc((100vw - 56px) / 2), 280px"
                 width="1000"
                 height="750"
                 alt="Монтаж стен из СИП-панелей"
@@ -503,6 +548,8 @@
               <img
                 class="review-card__image"
                 src="assets/review-olesya.jpg"
+                srcset="assets/review-olesya-640.webp 640w"
+                sizes="(max-width: 760px) 86vw, (max-width: 1040px) calc((100vw - 56px) / 2), 280px"
                 width="1000"
                 height="750"
                 alt="Домик из СИП-панелей под отделку"
@@ -524,6 +571,8 @@
               <img
                 class="review-card__image"
                 src="assets/review-viktor.jpg"
+                srcset="assets/review-viktor-640.webp 640w"
+                sizes="(max-width: 760px) 86vw, (max-width: 1040px) calc((100vw - 56px) / 2), 280px"
                 width="1000"
                 height="750"
                 alt="Дом из СИП-панелей в процессе строительства"
@@ -692,7 +741,7 @@
                   data-purpose="Дом для себя"
                   data-area="56"
                 >
-                  <img src="assets/project-56.jpg" width="1536" height="1024" alt="Компактный СИП-дом для жизни за городом" loading="lazy" decoding="async" />
+                  <img src="assets/project-56.jpg" srcset="assets/project-56-640.webp 640w, assets/project-56-960.webp 960w" sizes="(max-width: 760px) 50vw, 260px" width="1536" height="1024" alt="Компактный СИП-дом для жизни за городом" loading="lazy" decoding="async" />
                   <span><strong>Для себя</strong><small>дача или дом для жизни за городом</small></span>
                 </button>
                 <button
@@ -702,7 +751,7 @@
                   data-purpose="Дом для семьи"
                   data-area="72"
                 >
-                  <img src="assets/project-family.jpg" width="1536" height="1024" alt="СИП-дом для семьи" loading="lazy" decoding="async" />
+                  <img src="assets/project-family.jpg" srcset="assets/project-family-640.webp 640w, assets/project-family-960.webp 960w" sizes="(max-width: 760px) 50vw, 260px" width="1536" height="1024" alt="СИП-дом для семьи" loading="lazy" decoding="async" />
                   <span><strong>Для семьи</strong><small>больше комнат и удобная планировка</small></span>
                 </button>
                 <button
@@ -712,7 +761,7 @@
                   data-purpose="Индивидуальное решение"
                   data-area="90"
                 >
-                  <img src="assets/project-bath.jpg" width="1536" height="1024" alt="Индивидуальный дом или гостевое строение" loading="lazy" decoding="async" />
+                  <img src="assets/project-bath.jpg" srcset="assets/project-bath-640.webp 640w, assets/project-bath-960.webp 960w" sizes="(max-width: 760px) 50vw, 260px" width="1536" height="1024" alt="Индивидуальный дом или гостевое строение" loading="lazy" decoding="async" />
                   <span><strong>Индивидуально</strong><small>своя задача, планировка или формат</small></span>
                 </button>
               </div>
@@ -804,6 +853,6 @@
     <script>
       window.SIP_LEAD_ENDPOINT = "https://functions.yandexcloud.net/d4epp8bq7877smmmg32v";
     </script>
-    <script src="script.js?v=20260721-layout-1024"></script>
+    <script src="script.min.js?v=20260721-cover-seo"></script>
   </body>
 </html>

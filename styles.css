@@ -532,6 +532,10 @@ h3 {
   background: var(--surface-2);
 }
 
+.section--muted .section-label {
+  color: var(--clay-dark);
+}
+
 .kit-section {
   border-top: 1px solid rgba(49, 93, 67, 0.12);
   border-bottom: 1px solid rgba(179, 92, 51, 0.22);
