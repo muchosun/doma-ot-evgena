@@ -1834,6 +1834,10 @@ details p {
   grid-column: 1 / -1;
 }
 
+.contact-call {
+  grid-column: 1 / -1;
+}
+
 .contact-actions--buttons .contact-note {
   grid-column: 1 / -1;
   padding-top: 4px;
